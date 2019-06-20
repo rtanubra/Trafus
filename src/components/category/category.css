@@ -1,0 +1,29 @@
+table{
+  margin-left:auto;
+  margin-right:auto;
+  margin-bottom:30px;
+}
+section{
+  margin-bottom:30px;
+}
+section.category {
+  min-height: 200px;
+  padding: 30px 15px;
+  background-color: #bbb;
+}
+
+section.category:nth-child(even) {
+  background-color: #ddd;
+}
+table, th, td {
+  border: 1px solid black;
+}
+
+section.category.active-category{
+  background-color: whitesmoke;
+  font-size:18px;
+}
+
+button.css_add_expense{
+    height:30px;
+}

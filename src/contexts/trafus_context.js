@@ -20,16 +20,22 @@ const TrafusContext = React.createContext({
             "budget":1500,
         },
         {
-            "name":"transportation",
+            "name":"Transportation",
             "id":2,
             "team_id":1,
             "budget":500
         },
         {
-            "name":"groceries",
+            "name":"Groceries",
             "id":3,
             "team_id":1,
             "budget":500
+        },
+        {
+            "name":"Phone",
+            "id":4,
+            "team_id":1,
+            "budget":120
         }
 
     ],
@@ -45,6 +51,30 @@ const TrafusContext = React.createContext({
             "expense":150,
             "id":2,
             "category_id":1
+        },
+        {
+            "name":"Longos",
+            "expense":50,
+            "id":3,
+            "category_id":3
+        },
+        {
+            "name":"Go-1",
+            "expense":300,
+            "id":4,
+            "category_id":2
+        },
+        {
+            "name":"Go-2",
+            "expense":100,
+            "id":5,
+            "category_id":2
+        },
+        {
+            "name":"Pay that telephone bill",
+            "expense":110,
+            "id":6,
+            "category_id":4
         }
     ]
 })
