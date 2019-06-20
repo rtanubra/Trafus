@@ -33,7 +33,20 @@ const TrafusContext = React.createContext({
         }
 
     ],
-    trafus_expenses:[]
+    trafus_expenses:[
+        {
+            "name":"Italian",
+            "expense":50,
+            "id":1,
+            "category_id":1
+        },
+        {
+            "name":"Japanese",
+            "expense":150,
+            "id":2,
+            "category_id":1
+        }
+    ]
 })
 
 export default TrafusContext
