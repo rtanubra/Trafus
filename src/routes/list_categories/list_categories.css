@@ -1,0 +1,14 @@
+button{
+    height:30px;
+    margin:10px;
+    width:150px;
+    border-radius:12px;
+    font-weight: bold;
+}
+button.css_add_category{
+    color:purple;
+}
+button.css_add_category:hover{
+    color:white;
+    background-color:purple;
+}

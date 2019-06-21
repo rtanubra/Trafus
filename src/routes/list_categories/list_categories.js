@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import './list_categories.css'
 import TrafusContext from "../../contexts/trafus_context"
 import Category from "../../components/category/category"
-
+import {Link} from 'react-router-dom'
 
 class ListCategories extends Component {
     static contextType = TrafusContext
@@ -25,6 +25,9 @@ class ListCategories extends Component {
         return (
             <div>
                 <h2>{`Current Budget for ${team.name}`}</h2>
+                <Link to={`/${userId}/${teamId}/categories`} >
+                    <button className="css_add_category">Add a Category</button>
+                </Link>
                 {teamCategoriesDisplayed}
             </div>
             )

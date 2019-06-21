@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 //routes
 import ListCategory from '../../routes/list_categories/list_categories'
 import ListExpenses from '../../routes/list_expenses/list_expenses'
+import AddCategory from '../../routes/add_category/add_category'
 
 import './App.css'
 
@@ -17,6 +18,11 @@ class App extends Component{
                     exact
                     path={'/:userId/:teamId'}
                     component={ListCategory}
+                />
+                <Route
+                    exact
+                    path={'/:userId/:teamId/categories'}
+                    component={AddCategory}
                 />
                 <Route
                     exact
