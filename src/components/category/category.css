@@ -24,6 +24,24 @@ section.category.active-category{
   font-size:18px;
 }
 
-button.css_add_expense{
+button{
     height:30px;
+    margin:10px;
+    width:150px;
+    border-radius:12px;
+    font-weight: bold;
+}
+button.css_add_expense{
+    color:blue
+}
+button.css_add_expense:hover{
+    color:white;
+    background-color: blue;
+}
+button.css_expense_detail{
+    color:green;
+}
+button.css_expense_detail:hover{
+    color:white;
+    background-color:green;
 }

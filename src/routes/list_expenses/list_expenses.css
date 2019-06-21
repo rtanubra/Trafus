@@ -1,0 +1,24 @@
+ul{
+  list-style-type:none
+}
+button{
+    height:30px;
+    margin:10px;
+    width:150px;
+    border-radius:12px;
+    font-weight: bold;
+}
+button.css_add_expense{
+    color:blue
+}
+button.css_add_expense:hover{
+    color:white;
+    background-color: blue;
+}
+button.css_go_back{
+    color:red
+}
+button.css_go_back:hover{
+    color:white;
+    background-color:red
+}

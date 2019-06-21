@@ -75,6 +75,12 @@ const TrafusContext = React.createContext({
             "expense":110,
             "id":6,
             "category_id":4
+        },
+        {
+            "name":"Wine tasting",
+            "expense":410,
+            "id":7,
+            "category_id":1
         }
     ]
 })

@@ -3,6 +3,7 @@ import './list_categories.css'
 import TrafusContext from "../../contexts/trafus_context"
 import Category from "../../components/category/category"
 
+
 class ListCategories extends Component {
     static contextType = TrafusContext
 
@@ -18,7 +19,7 @@ class ListCategories extends Component {
             return category.team_id == teamId 
         })
         const teamCategoriesDisplayed = teamCategories.map(category=>{
-            return <Category category={category} key={`category_${category.id}`} expenses={this.state.expenses} />
+            return <Category userId={userId} teamId={teamId}  category={category} key={`category_${category.id}`} expenses={this.state.expenses} />
         })
         const team = this.state.teams.filter(team=>{return team.id==teamId })[0]
         return (
