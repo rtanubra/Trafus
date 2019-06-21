@@ -25,7 +25,7 @@ class ListCategories extends Component {
         return (
             <div>
                 <h2>{`Current Budget for ${team.name}`}</h2>
-                <Link to={`/${userId}/${teamId}/categories`} >
+                <Link to={`/${userId}/${teamId}/add_category`} >
                     <button className="css_add_category">Add a Category</button>
                 </Link>
                 {teamCategoriesDisplayed}

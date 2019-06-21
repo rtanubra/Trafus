@@ -12,9 +12,9 @@ class Category extends Component{
             <section className="category" >
                 <h3>{category.name}</h3>
                 <CategorySummaryTable category={this.props.category} expenses={this.props.expenses}  />
-                
+                <Link to={`/${this.props.userId}/${this.props.teamId}/${category.id}/add_expense`}>
                     <button className="css_add_expense">Add an Expense</button>
-
+                </Link>
                 <Link to={`/${this.props.userId}/${this.props.teamId}/${category.id}`}  >
                     <button className="css_expense_detail">{category.name} detail</button>
                 </Link>
