@@ -6,7 +6,7 @@ const TrafusContext = React.createContext({
     trafus_categories :"",
     trafus_expenses:"",
     addCategory:()=>{},
-    //addExpense:()=>{},
+    addExpense:()=>{},
     //deleteCategory:()=>{},
     //deleteExpense:()=>{},
 })

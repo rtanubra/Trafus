@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "name": "trafus",
+  "alias": "rtanubra-trafus-app",
+  "routes": [
+      {
+        "src": "^/static/(.*)",
+        "dest": "/static/$1"
+      },
+      {
+        "src": ".*",
+        "dest": "/index.html"
+      }
+  ]
+}
