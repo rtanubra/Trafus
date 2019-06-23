@@ -3,6 +3,7 @@ import TrafusContext from "../../contexts/trafus_context"
 import ErrorMessage from '../../components/error/ErrorMessage'
 import './add_category.css'
 import {Link} from 'react-router-dom'
+import ButtonTemplate from '../../components/button/button'
 
 class AddCategory extends Component {
     static contextType = TrafusContext
@@ -69,10 +70,24 @@ class AddCategory extends Component {
             }
         })
     }
-
+    callAddCategory=(category)=>{
+        this.context.AddCategory(category)
+    }
     handleSubmit =(event)=>{
         event.preventDefault()
         console.log(this.state.name, this.state.budget)
+        
+        const {teamId} = this.props.match.params
+        const category = {
+            name:this.state.name,
+            budget:this.state.budget,
+            team_id: teamId
+        }
+        console.log(category)
+        console.log(this.context.addCategory)
+        this.context.addCategory(category)
+
+        
     }
     render(){
         const {userId, teamId} = this.props.match.params
@@ -93,9 +108,9 @@ class AddCategory extends Component {
                         <label htmlFor="js_category_budget" >Expected Budget : </label>
                         <input value={this.state.budget} onChange={this.handleBudgetChange} required type="number" min="0" step="0.01" max="100000" name="js_category_budget" id="js_category_budget"/>
                         <br/>
-                        <button className="css_submit_button" type="submit">Submit</button>
+                        <ButtonTemplate className="css_submit_button" type="submit" label="Submit" />
                         <Link to={`/${userId}/${teamId}/`} >
-                        <button className="css_back_button" >Go Back</button>
+                            <ButtonTemplate className="css_back_button" label="Go Back"/>
                         </Link>
 
                     </fieldset>
