@@ -6,6 +6,7 @@ import ListCategory from '../../routes/list_categories/list_categories'
 import ListExpenses from '../../routes/list_expenses/list_expenses'
 import AddCategory from '../../routes/add_category/add_category'
 import AddExpense from '../../routes/add_expense/add_expense'
+import LandingPage from '../../routes/landing_page/landing_page'
 
 //context 
 import TrafusContext from '../../contexts/trafus_context'
@@ -76,6 +77,11 @@ class App extends Component{
                     path={'/:userId/:teamId/:categoryId'}
                     component={ListExpenses}
                 /> 
+                <Route 
+                    exact
+                    path={'/'}
+                    component={LandingPage}
+                />
             </Switch>
           </TrafusContext.Provider>
     )
