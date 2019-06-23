@@ -4,7 +4,7 @@ import CategorySummaryTable from '../../components/category/category_summary'
 import Expense from "../../components/expense/expense"
 import './list_expenses.css'
 import {Link} from 'react-router-dom'
-
+import ButtonTemplate from "../../components/button/button"
 class ListExpenses extends Component{
     static contextType = TrafusContext
     state ={
@@ -33,7 +33,10 @@ class ListExpenses extends Component{
                 <h3>{`${category.name}`}</h3>
                 <CategorySummaryTable category ={category} expenses={this.state.expenses} />
                 <ul>{expenseListDisplay}</ul>
-                <button className="css_add_expense">Add Expense</button>
+
+                <Link to={`/${userId}/${teamId}/${categoryId}/add_expense`}>
+                    <ButtonTemplate className="css_add_expense" label="Add an Expense"/>
+                </Link>
                 <Link to={`/${userId}/${teamId}`}>
                     <button className="css_go_back">Back to Categories</button>
                 </Link>

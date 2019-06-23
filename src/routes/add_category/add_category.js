@@ -80,8 +80,8 @@ class AddCategory extends Component {
         const {teamId} = this.props.match.params
         const category = {
             name:this.state.name,
-            budget:this.state.budget,
-            team_id: teamId
+            budget:parseFloat(this.state.budget),
+            team_id: parseInt(teamId)
         }
         console.log(category)
         console.log(this.context.addCategory)

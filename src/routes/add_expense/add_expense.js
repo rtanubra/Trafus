@@ -50,8 +50,15 @@ class AddExpense extends Component{
             }
         })
     }
-    handleSubmit (event){
+    handleSubmit= (event)=>{
         event.preventDefault()
+        const { categoryId} = this.props.match.params
+        const expense = {
+            name:this.state.name,
+            expense:parseFloat(this.state.expense),
+            category_id:parseInt(categoryId)
+        }
+        this.context.addExpense(expense)
     }
     handleExpenseChange=(event)=>{
         const expense = event.target.value;

@@ -30,11 +30,27 @@ class App extends Component{
             trafus_categories:[...current_cats,new_category]
         })
     }
+
+    addExpense = (expense)=>{
+        const current_exp = [...this.state.trafus_expenses]
+        const last_id = current_exp[current_exp.length-1].id
+        const new_expense = {
+            name:expense.name,
+            expense:expense.expense,
+            category_id: expense.category_id,
+            id:last_id+1
+        }
+        this.setState({
+            trafus_expenses:[...current_exp,new_expense]
+        })
+    }
+
     render(){
         const contextValue = {
             ...this.state
         }
         contextValue.addCategory=this.addCategory
+        contextValue.addExpense=this.addExpense
         console.log(contextValue)   
         return (
           <TrafusContext.Provider value={contextValue}>
