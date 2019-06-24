@@ -89,14 +89,14 @@ class App extends Component{
                 />
                 <Route
                     exact
-                    path={'/:userId/:teamId/:categoryId'}
-                    component={ListExpenses}
-                /> 
-                <Route
-                    exact
                     path={'/:userId/:teamId/:categoryId/:expenseId'}
                     component={EditExpense}
                 />
+                <Route
+                    exact
+                    path={'/:userId/:teamId/:categoryId/'}
+                    component={ListExpenses}
+                /> 
                 <Route 
                     exact
                     path={'/'}

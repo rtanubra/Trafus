@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import './expense.css'
 import {Link} from 'react-router-dom'
 
+
 class Expense extends Component{
     render(){
         return (
