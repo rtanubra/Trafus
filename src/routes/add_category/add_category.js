@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import TrafusContext from "../../contexts/trafus_context"
 import ErrorMessage from '../../components/error/ErrorMessage'
 import './add_category.css'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import ButtonTemplate from '../../components/button/button'
 
 class AddCategory extends Component {
@@ -17,7 +17,9 @@ class AddCategory extends Component {
         error_message:{
             error_message_name:"",
             error_message_budget:""
-        }
+        },
+        success:false,
+        newCategoryId:""
     }
 
     handleNameChange = (event)=>{
@@ -45,6 +47,8 @@ class AddCategory extends Component {
                 error_message_budget:error_message_budget
             }
         })
+
+
 
     }
 
@@ -75,25 +79,34 @@ class AddCategory extends Component {
     }
     handleSubmit =(event)=>{
         event.preventDefault()
-        console.log(this.state.name, this.state.budget)
-        
-        const {teamId} = this.props.match.params
-        const category = {
-            name:this.state.name,
-            budget:parseFloat(this.state.budget),
-            team_id: parseInt(teamId)
+        if (this.state.error.error_name || this.state.error.error_budget){
+            //do not proceed - erorr message provided
         }
-        console.log(category)
-        console.log(this.context.addCategory)
-        this.context.addCategory(category)
-
+        else{
+            const {teamId} = this.props.match.params
+            const category = {
+                name:this.state.name,
+                budget:parseFloat(this.state.budget),
+                team_id: parseInt(teamId)
+            }
+            this.context.addCategory(category)
+            this.setState({
+                name:"",
+                budget:"",
+                success:true
+            })
+        }
         
+
     }
     render(){
         const {userId, teamId} = this.props.match.params
         const team =this.context.trafus_teams.find(team=>{
             return team.id == teamId
         })
+        if (this.state.success){
+            return (<Redirect to={`/${userId}/${teamId}/`} />)
+        }
         return (
             <div>
                 <h2>{team.name} Categories</h2>

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import TrafusContext from '../../contexts/trafus_context'
 import ErrorMessage from '../../components/error/ErrorMessage'
 import ButtonTemplate from '../../components/button/button'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import './add_expense.css'
 
 
@@ -19,7 +19,8 @@ class AddExpense extends Component{
         error_message:{
             error_message_name:"",
             error_message_expense:""
-        }
+        },
+        success:false
     }
 
     handleNameChange= (event)=>{
@@ -52,13 +53,24 @@ class AddExpense extends Component{
     }
     handleSubmit= (event)=>{
         event.preventDefault()
-        const { categoryId} = this.props.match.params
-        const expense = {
-            name:this.state.name,
-            expense:parseFloat(this.state.expense),
-            category_id:parseInt(categoryId)
+        if (this.state.error.error_expense || this.state.error.error_name){
+            //do nothing we have errors
         }
-        this.context.addExpense(expense)
+        else{
+            const { categoryId} = this.props.match.params
+            const expense = {
+                name:this.state.name,
+                expense:parseFloat(this.state.expense),
+                category_id:parseInt(categoryId)
+            }
+            this.context.addExpense(expense)
+            this.setState({
+                name:"",
+                expense:"",
+                success:true
+            })
+        }
+        
     }
     handleExpenseChange=(event)=>{
         const expense = event.target.value;
@@ -90,6 +102,11 @@ class AddExpense extends Component{
         const team =this.context.trafus_teams.find(team=>{
             return team.id == teamId
         })
+
+        if (this.state.success){
+            return <Redirect to ={`/${userId}/${teamId}/${categoryId}`} />
+        }
+
         return (
             <div>
                 <h2>{`Add Expense to - ${category.name}`}</h2>
