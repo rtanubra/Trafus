@@ -25,7 +25,7 @@ class ListExpenses extends Component{
             return expense.category_id == categoryId
         })
         const expenseListDisplay = expenseList.map(expense=>{
-            return <Expense key={`expense_${expense.id}`} expense={expense}/>
+            return <Expense userId={userId} categoryId={categoryId} teamId={teamId}  key={`expense_${expense.id}`} expense={expense}/>
         })
         return (
             <div>  

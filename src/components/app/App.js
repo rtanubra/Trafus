@@ -7,6 +7,7 @@ import ListExpenses from '../../routes/list_expenses/list_expenses'
 import AddCategory from '../../routes/add_category/add_category'
 import AddExpense from '../../routes/add_expense/add_expense'
 import LandingPage from '../../routes/landing_page/landing_page'
+import EditExpense from '../../routes/edit_expense/edit_expense'
 
 //context 
 import TrafusContext from '../../contexts/trafus_context'
@@ -31,7 +32,21 @@ class App extends Component{
             trafus_categories:[...current_cats,new_category]
         })
     }
+    editExpense = (expense)=>{
+        console.log("here")
+        const currentExpense = [...this.state.trafus_expenses]
 
+        currentExpense.forEach(exp=>{
+            if (exp.id === parseInt(expense.id)){
+                exp.name = expense.name
+                exp.expense = parseInt(expense.expense)
+            }
+        })
+        this.setState({
+            trafus_expenses:[...currentExpense]
+        })
+
+    }
     addExpense = (expense)=>{
         const current_exp = [...this.state.trafus_expenses]
         const last_id = current_exp[current_exp.length-1].id
@@ -52,6 +67,7 @@ class App extends Component{
         }
         contextValue.addCategory=this.addCategory
         contextValue.addExpense=this.addExpense
+        contextValue.editExpense = this.editExpense
         return (
           <TrafusContext.Provider value={contextValue}>
             <h1>Trafus-placeholder here</h1>
@@ -76,6 +92,11 @@ class App extends Component{
                     path={'/:userId/:teamId/:categoryId'}
                     component={ListExpenses}
                 /> 
+                <Route
+                    exact
+                    path={'/:userId/:teamId/:categoryId/:expenseId'}
+                    component={EditExpense}
+                />
                 <Route 
                     exact
                     path={'/'}
