@@ -52,7 +52,6 @@ class App extends Component{
         }
         contextValue.addCategory=this.addCategory
         contextValue.addExpense=this.addExpense
-        console.log(contextValue)   
         return (
           <TrafusContext.Provider value={contextValue}>
             <h1>Trafus-placeholder here</h1>
