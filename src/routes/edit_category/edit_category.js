@@ -84,7 +84,7 @@ class EditCategory extends Component{
 
         this.context.editCategory({
             name:this.state.name,
-            budget:this.state.budget,
+            budget: parseFloat(this.state.budget),
             id: this.props.match.params.categoryId
         })
         this.setState({

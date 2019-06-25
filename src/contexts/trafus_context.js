@@ -9,8 +9,8 @@ const TrafusContext = React.createContext({
     addExpense:()=>{},
     editExpense:()=>{},
     editCategory:()=>{},
-    //deleteCategory:()=>{},
-    //deleteExpense:()=>{},
+    deleteCategory:()=>{},
+    deleteExpense:()=>{},
 })
 
 export default TrafusContext

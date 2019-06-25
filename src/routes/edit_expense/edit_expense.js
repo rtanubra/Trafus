@@ -42,7 +42,7 @@ class EditExpense extends Component{
             
             this.context.editExpense({
                 name:this.state.name,
-                expense:this.state.expense,
+                expense:parseFloat(this.state.expense),
                 id:this.props.match.params.expenseId
             })
             this.setState({
@@ -53,7 +53,7 @@ class EditExpense extends Component{
     handleDelete =()=>{
         const expense = {
             name:this.state.name,
-            expense:this.state.expense,
+            expense:parseFloat(this.state.expense),
             id:this.props.match.params.expenseId
         }
         this.context.deleteExpense(expense)

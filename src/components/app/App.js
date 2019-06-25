@@ -41,7 +41,7 @@ class App extends Component{
         currentExpenses.forEach(exp=>{
             if (exp.id === parseInt(expense.id)){
                 exp.name = expense.name
-                exp.expense = parseInt(expense.expense)
+                exp.expense = expense.expense
             }
         })
         this.setState({

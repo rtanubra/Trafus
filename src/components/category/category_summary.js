@@ -11,7 +11,9 @@ class CategorySummaryTable extends Component {
         return spent
 
     }
-
+    roundMe = (number)=>{
+        return Math.round(number * 100)/100
+    }
     render(){
 
         const current_expense = this.calculateCurrentExpense(this.props.category,this.props.expenses)
@@ -27,9 +29,9 @@ class CategorySummaryTable extends Component {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{this.props.category.budget}</td>
-                        <td>{current_expense}</td>
-                        <td>{remaining}</td>
+                        <td>{this.roundMe(this.props.category.budget)}</td>
+                        <td>{this.roundMe(current_expense)}</td>
+                        <td>{this.roundMe(remaining)}</td>
                     </tr>
                 </tbody>
             </table>
