@@ -91,6 +91,17 @@ class EditCategory extends Component{
             success:true
         })
     }
+    handleDelete = ()=>{
+        const category = {
+            name:this.state.name,
+            budget:this.state.budget,
+            id:this.props.match.params.categoryId
+        }
+        this.context.deleteCategory(category)
+        this.setState({
+            success:true
+        })
+    }
     render(){
         const {userId, teamId, categoryId} = this.props.match.params
         const category =this.context.trafus_categories.find(cat=>{
@@ -119,6 +130,7 @@ class EditCategory extends Component{
                         </Link>
                     </fieldset>
                 </form>
+                <ButtonTemplate onClick={this.handleDelete} className="css_back_button" label={`Delete ${this.state.name}`} />
             </div>
         )
     }

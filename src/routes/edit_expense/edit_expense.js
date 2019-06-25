@@ -50,7 +50,18 @@ class EditExpense extends Component{
             })
         }
     }
-
+    handleDelete =()=>{
+        const expense = {
+            name:this.state.name,
+            expense:this.state.expense,
+            id:this.props.match.params.expenseId
+        }
+        this.context.deleteExpense(expense)
+        console.log(expense)
+        this.setState({
+            success:true
+        })
+    }
     handleNameChange= (event)=>{
         const name = event.target.value;
         let error_name = false
@@ -79,6 +90,7 @@ class EditExpense extends Component{
             }
         })
     }
+
 
     handleExpenseChange=(event)=>{
         const expense = event.target.value;
@@ -129,6 +141,7 @@ class EditExpense extends Component{
                         <Link to={`/${userId}/${teamId}/${categoryId}`} ><ButtonTemplate className="css_back_button" label={`Back to ${category.name}`}/></Link>
                     </fieldset>
                 </form>
+                <ButtonTemplate onClick={this.handleDelete} className="css_back_button" label={`Delete - ${this.state.name}`} />
             </div>
         )
     }

@@ -28,7 +28,8 @@ class App extends Component{
             name:category.name,
             team_id:category.team_id,
             budget:category.budget,
-            id:last_id+1
+            id:last_id+1,
+            active:true
         }
         this.setState({
             trafus_categories:[...current_cats,new_category]
@@ -67,13 +68,36 @@ class App extends Component{
             name:expense.name,
             expense:expense.expense,
             category_id: expense.category_id,
-            id:last_id+1
+            id:last_id+1,
+            active:true
         }
         this.setState({
             trafus_expenses:[...current_exp,new_expense]
         })
     }
+    deleteCategory = (category)=>{
+        const currentCategories= [...this.state.trafus_categories]
+        currentCategories.forEach(cat=>{
+            if (cat.id === parseInt(category.id)){
+                cat.active= false
+            }
+        })
+        this.setState({
+            trafus_categories:[...currentCategories]
+        })
+    }
+    deleteExpense = (expense)=>{
+        const currentExpenses = [...this.state.trafus_expenses]
+        currentExpenses.forEach(exp=>{
+            if(exp.id === parseInt(expense.id)){
+                exp.active = false 
+            }
+        })
+        this.setState({
+            trafus_expenses:[...currentExpenses]
+        })
 
+    }
     render(){
         const contextValue = {
             ...this.state
@@ -82,6 +106,8 @@ class App extends Component{
         contextValue.addExpense=this.addExpense
         contextValue.editExpense = this.editExpense
         contextValue.editCategory = this.editCategory
+        contextValue.deleteCategory=this.deleteCategory
+        contextValue.deleteExpense=this.deleteExpense
         return (
           <TrafusContext.Provider value={contextValue}>
             <h1>Trafus-placeholder here</h1>
