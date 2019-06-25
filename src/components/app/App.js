@@ -8,6 +8,7 @@ import AddCategory from '../../routes/add_category/add_category'
 import AddExpense from '../../routes/add_expense/add_expense'
 import LandingPage from '../../routes/landing_page/landing_page'
 import EditExpense from '../../routes/edit_expense/edit_expense'
+import EditCategory from '../../routes/edit_category/edit_category'
 
 //context 
 import TrafusContext from '../../contexts/trafus_context'
@@ -19,6 +20,7 @@ class App extends Component{
     state = {
         ...starting_context
     }
+    
     addCategory = (category)=>{
         const current_cats = [...this.state.trafus_categories]
         const last_id = current_cats[current_cats.length-1].id
@@ -33,19 +35,30 @@ class App extends Component{
         })
     }
     editExpense = (expense)=>{
-        console.log("here")
-        const currentExpense = [...this.state.trafus_expenses]
+        const currentExpenses = [...this.state.trafus_expenses]
 
-        currentExpense.forEach(exp=>{
+        currentExpenses.forEach(exp=>{
             if (exp.id === parseInt(expense.id)){
                 exp.name = expense.name
                 exp.expense = parseInt(expense.expense)
             }
         })
         this.setState({
-            trafus_expenses:[...currentExpense]
+            trafus_expenses:[...currentExpenses]
         })
 
+    }
+    editCategory=(category)=>{
+        const currentCategories = [...this.state.trafus_categories]
+        currentCategories.forEach(cat=>{
+            if(cat.id===parseInt(category.id)){
+                cat.name=category.name
+                cat.budget=category.budget
+            }
+        })
+        this.setState({
+            trafus_categories:[...currentCategories]
+        })
     }
     addExpense = (expense)=>{
         const current_exp = [...this.state.trafus_expenses]
@@ -68,6 +81,7 @@ class App extends Component{
         contextValue.addCategory=this.addCategory
         contextValue.addExpense=this.addExpense
         contextValue.editExpense = this.editExpense
+        contextValue.editCategory = this.editCategory
         return (
           <TrafusContext.Provider value={contextValue}>
             <h1>Trafus-placeholder here</h1>
@@ -89,13 +103,18 @@ class App extends Component{
                 />
                 <Route
                     exact
-                    path={'/:userId/:teamId/:categoryId/:expenseId'}
+                    path={'/:userId/:teamId/:categoryId/:expenseId/edit'}
                     component={EditExpense}
                 />
                 <Route
                     exact
                     path={'/:userId/:teamId/:categoryId/'}
                     component={ListExpenses}
+                /> 
+                <Route
+                    exact
+                    path={'/:userId/:teamId/:categoryId/edit'}
+                    component={EditCategory}
                 /> 
                 <Route 
                     exact

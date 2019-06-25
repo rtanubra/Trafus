@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
-import TrafusContext from "../../contexts/trafus_context"
-import ErrorMessage from '../../components/error/ErrorMessage'
-import './add_category.css'
-import {Link, Redirect} from 'react-router-dom'
-import ButtonTemplate from '../../components/button/button'
+import TrafusContext from '../../contexts/trafus_context'
+import {Redirect,Link} from 'react-router-dom'
 
-class AddCategory extends Component {
+import ButtonTemplate from '../../components/button/button'
+import ErrorMessage from '../../components/error/ErrorMessage'
+
+class EditCategory extends Component{
     static contextType = TrafusContext
     state = {
         name:"",
@@ -21,7 +21,16 @@ class AddCategory extends Component {
         success:false,
         newCategoryId:""
     }
-
+    componentDidMount(){
+        const {userId, teamId,categoryId} = this.props.match.params
+        const category = this.context.trafus_categories.find(cat=>{
+            return cat.id === parseInt(categoryId)
+        })
+        this.setState({
+            name:category.name,
+            budget:category.budget
+        })
+    }
     handleNameChange = (event)=>{
         const name = event.target.value
         let error_name = false
@@ -47,11 +56,7 @@ class AddCategory extends Component {
                 error_message_budget:error_message_budget
             }
         })
-
-
-
     }
-
     handleBudgetChange = (event)=>{
         const budget = event.target.value
         let error_name = this.state.error.error_name
@@ -74,43 +79,32 @@ class AddCategory extends Component {
             }
         })
     }
+    handleSubmit=(e)=>{
+        e.preventDefault()
 
-    handleSubmit =(event)=>{
-        event.preventDefault()
-        if (this.state.error.error_name || this.state.error.error_budget){
-            //do not proceed - erorr message provided
-        }
-        else{
-            const {teamId} = this.props.match.params
-            const category = {
-                name:this.state.name,
-                budget:parseFloat(this.state.budget),
-                team_id: parseInt(teamId)
-            }
-            this.context.addCategory(category)
-            this.setState({
-                name:"",
-                budget:"",
-                success:true
-            })
-        }
-        
-
+        this.context.editCategory({
+            name:this.state.name,
+            budget:this.state.budget,
+            id: this.props.match.params.categoryId
+        })
+        this.setState({
+            success:true
+        })
     }
     render(){
-        const {userId, teamId} = this.props.match.params
-        const team =this.context.trafus_teams.find(team=>{
-            return team.id == teamId
+        const {userId, teamId, categoryId} = this.props.match.params
+        const category =this.context.trafus_categories.find(cat=>{
+            return cat.id == categoryId
         })
         if (this.state.success){
-            return (<Redirect to={`/${userId}/${teamId}/`} />)
+            return <Redirect to={`/${userId}/${teamId}/`} />
         }
         return (
             <div>
-                <h2>{team.name} Categories</h2>
+                <h2>Edit - {this.state.name}</h2>
                 <form onSubmit={this.handleSubmit}>
                     <fieldset>
-                        <legend>Add a Category</legend>
+                        <legend>Edit Category</legend>
                         {this.state.error.error_name ? <ErrorMessage message={this.state.error_message.error_message_name} /> :""}
                         <label htmlFor="js_category_name" >Category Name : </label>
                         <input required onChange={this.handleNameChange} value={this.state.name} type="text" name="js_category_name" id="js_category_name"/>
@@ -123,11 +117,11 @@ class AddCategory extends Component {
                         <Link to={`/${userId}/${teamId}/`} >
                             <ButtonTemplate className="css_back_button" label="Go Back"/>
                         </Link>
-
                     </fieldset>
                 </form>
             </div>
         )
     }
+    
 }
-export default AddCategory
+export default EditCategory
