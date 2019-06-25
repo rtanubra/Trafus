@@ -13,8 +13,6 @@ class TeamSummary extends Component{
         const catIds = categories.map(cat=>{
             return cat.id
         })
-        console.log(catIds)
-        console.log(expenses)
         expenses.forEach(exp=>{
             if (exp.active===true && catIds.indexOf(exp.category_id) >-1){
                 totalExpense += exp.expense

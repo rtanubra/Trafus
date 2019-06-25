@@ -10,9 +10,8 @@ class EditExpense extends Component{
     static contextType = TrafusContext
     
     componentDidMount(){
-        const {userId, teamId, categoryId, expenseId} = this.props.match.params
         const expense = this.context.trafus_expenses.find(exp=>{
-            return exp.id === parseInt(expenseId)
+            return exp.id === parseInt(this.props.match.params.expenseId)
         })
         this.setState({
             name:expense.name,
@@ -116,7 +115,7 @@ class EditExpense extends Component{
     }
 
     render(){
-        const {userId, teamId, categoryId, expenseId} = this.props.match.params
+        const {userId, teamId, categoryId} = this.props.match.params
         const category = this.context.trafus_categories.find(cat=>{
             return cat.id === parseInt(categoryId)
         })

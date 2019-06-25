@@ -22,7 +22,7 @@ class EditCategory extends Component{
         newCategoryId:""
     }
     componentDidMount(){
-        const {userId, teamId,categoryId} = this.props.match.params
+        const {categoryId} = this.props.match.params
         const category = this.context.trafus_categories.find(cat=>{
             return cat.id === parseInt(categoryId)
         })
@@ -103,10 +103,8 @@ class EditCategory extends Component{
         })
     }
     render(){
-        const {userId, teamId, categoryId} = this.props.match.params
-        const category =this.context.trafus_categories.find(cat=>{
-            return cat.id == categoryId
-        })
+        const {userId, teamId} = this.props.match.params
+
         if (this.state.success){
             return <Redirect to={`/${userId}/${teamId}/`} />
         }

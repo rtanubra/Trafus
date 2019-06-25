@@ -18,14 +18,14 @@ class ListCategories extends Component {
     render(){
         const {userId, teamId} = this.props.match.params
         const teamCategories = this.state.categories.filter(category=>{
-            if (category.active==true){
-                return category.team_id == teamId 
-            }
+
+            return category.active===true && category.team_id === parseInt(teamId)
+    
         })
         const teamCategoriesDisplayed = teamCategories.map(category=>{
             return <Category userId={userId} teamId={teamId}  category={category} key={`category_${category.id}`} expenses={this.state.expenses} />
         })
-        const team = this.state.teams.filter(team=>{return team.id==teamId })[0]
+        const team = this.state.teams.filter(team=>{return team.id=== parseInt(teamId) })[0]
         return (
             <div>
                 <h2>{`Current Budget for ${team.name}`}</h2>

@@ -100,7 +100,7 @@ class AddCategory extends Component {
     render(){
         const {userId, teamId} = this.props.match.params
         const team =this.context.trafus_teams.find(team=>{
-            return team.id == teamId
+            return team.id === parseInt(teamId)
         })
         if (this.state.success){
             return (<Redirect to={`/${userId}/${teamId}/`} />)

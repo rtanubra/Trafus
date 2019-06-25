@@ -16,15 +16,15 @@ class ListExpenses extends Component{
     render(){
         const {userId,categoryId, teamId} = this.props.match.params
         const team = this.state.teams.find(team=>{
-            return team.id == teamId
+            return team.id === parseInt(teamId)
         })
         const category = this.state.categories.find(category=>{
-            return category.id == categoryId
+            return category.id === parseInt(categoryId)
         })
         const expenseList = this.state.expenses.filter(expense=>{
-            if (expense.active===true){
-                return expense.category_id == categoryId
-            } 
+
+            return expense.active===true && expense.category_id === parseInt(categoryId)
+
         })
         const expenseListDisplay = expenseList.map(expense=>{
             return <Expense userId={userId} categoryId={categoryId} teamId={teamId}  key={`expense_${expense.id}`} expense={expense}/>

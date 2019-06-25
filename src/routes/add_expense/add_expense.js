@@ -97,10 +97,7 @@ class AddExpense extends Component{
     render(){
         const {userId, teamId, categoryId} = this.props.match.params
         const category = this.context.trafus_categories.find(category=>{
-            return category.id == categoryId
-        })
-        const team =this.context.trafus_teams.find(team=>{
-            return team.id == teamId
+            return category.id === parseInt(categoryId)
         })
 
         if (this.state.success){
