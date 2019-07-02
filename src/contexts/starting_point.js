@@ -11,6 +11,7 @@ const starting_context = {
         "password":"password"}
     ],
     trafus_categories :[
+        /*
         {
             "name":"Food and Wine",
             "id":1,
@@ -39,8 +40,9 @@ const starting_context = {
             "budget":120,
             "active":true
         }
-
-    ],trafus_expenses:[
+        */
+    ]
+    ,trafus_expenses:[
         {
             "name":"Italian",
             "expense":50,
