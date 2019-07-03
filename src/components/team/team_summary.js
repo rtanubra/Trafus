@@ -14,7 +14,7 @@ class TeamSummary extends Component{
             return cat.id
         })
         expenses.forEach(exp=>{
-            if (exp.active===true && catIds.indexOf(exp.category_id) >-1){
+            if (catIds.indexOf(exp.category_id) >-1){
                 totalExpense += exp.expense
             }
         })

@@ -23,7 +23,7 @@ class ListExpenses extends Component{
         })
         const expenseList = this.state.expenses.filter(expense=>{
 
-            return expense.active===true && expense.category_id === parseInt(categoryId)
+            return  expense.category_id === parseInt(categoryId)
 
         })
         const expenseListDisplay = expenseList.map(expense=>{

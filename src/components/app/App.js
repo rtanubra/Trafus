@@ -14,6 +14,9 @@ import EditCategory from '../../routes/edit_category/edit_category'
 import TrafusContext from '../../contexts/trafus_context'
 import starting_context from "../../contexts/starting_point"
 
+//service
+//import ApiService from '../../services/api-services'
+
 import './App.css'
 
 class App extends Component{
@@ -25,7 +28,7 @@ class App extends Component{
         const base_url = process.env.REACT_APP_BASE_URL_DEV
         const team = 1 
         const final_url = `${base_url}categories/${team}/`
-        console.log(final_url)
+
         fetch(final_url).then(response=>{
             if (response.ok){
                 return response.json()
@@ -39,8 +42,37 @@ class App extends Component{
         }).catch(err=>{
             console.log(err)
         })
+
+        fetch(`${base_url}expenses/`).then(response=>{
+            if(response.ok){
+                return response.json()
+            }
+            throw new Error(response.statusText)
+        }).then(respJson=>{
+            console.log(respJson)
+            this.setState({
+                trafus_expenses:[...respJson]
+            })
+        })
     }
 
+    addCategoryAPI = (category)=>{
+        const base_url =process.env.REACT_APP_BASE_URL_DEV
+        const team = 1
+        console.log(category)
+        return fetch(`${base_url}categories/${team}/`, {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(category),
+            })
+            .then(res =>
+                (!res.ok)
+                ? res.json().then(e => Promise.reject(e))
+                : res.json()
+        )
+    }
     addCategory = (category)=>{
         const current_cats = [...this.state.trafus_categories]
         const last_id = current_cats[current_cats.length-1].id
@@ -123,14 +155,12 @@ class App extends Component{
             ...this.state
         }
         
-        contextValue.addCategory=this.addCategory
+        contextValue.addCategory=this.addCategoryAPI
         contextValue.addExpense=this.addExpense
         contextValue.editExpense = this.editExpense
         contextValue.editCategory = this.editCategory
         contextValue.deleteCategory=this.deleteCategory
         contextValue.deleteExpense=this.deleteExpense
-        console.log(this.state) // how have i updated the context but not cause a re-render?
-        console.log(contextValue) // how have i updated the context but not cause a re-render?
         return (
           <TrafusContext.Provider value={contextValue}>
             <h1>Trafus-placeholder here</h1>
