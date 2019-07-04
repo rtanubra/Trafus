@@ -35,6 +35,7 @@ class App extends Component{
             }
             throw new Error(response.statusText)
         }).then(respJson=>{
+            console.log(`fetched categories`)
             console.log(respJson)
             this.setState({
                 trafus_categories:[...respJson]
@@ -42,18 +43,19 @@ class App extends Component{
         }).catch(err=>{
             console.log(err)
         })
-
+        
         fetch(`${base_url}expenses/`).then(response=>{
             if(response.ok){
                 return response.json()
             }
             throw new Error(response.statusText)
         }).then(respJson=>{
+            console.log(`fetched expenses `)
             console.log(respJson)
             this.setState({
                 trafus_expenses:[...respJson]
             })
-        })
+        }) 
     }
 
     addCategoryAPI = (category)=>{
@@ -73,20 +75,7 @@ class App extends Component{
                 : res.json()
         )
     }
-    addCategory = (category)=>{
-        const current_cats = [...this.state.trafus_categories]
-        const last_id = current_cats[current_cats.length-1].id
-        const new_category = {
-            name:category.name,
-            team_id:category.team_id,
-            budget:category.budget,
-            id:last_id+1,
-            active:true
-        }
-        this.setState({
-            trafus_categories:[...current_cats,new_category]
-        })
-    }
+
     editExpense = (expense)=>{
         const currentExpenses = [...this.state.trafus_expenses]
 
@@ -113,20 +102,22 @@ class App extends Component{
             trafus_categories:[...currentCategories]
         })
     }
-    addExpense = (expense)=>{
-        const current_exp = [...this.state.trafus_expenses]
-        const last_id = current_exp[current_exp.length-1].id
-        const new_expense = {
-            name:expense.name,
-            expense:expense.expense,
-            category_id: expense.category_id,
-            id:last_id+1,
-            active:true
-        }
-        this.setState({
-            trafus_expenses:[...current_exp,new_expense]
+    addExpenseApi= (expense)=>{
+        const base_url =process.env.REACT_APP_BASE_URL_DEV
+        return fetch(`${base_url}expenses/`,{
+            method:"POST",
+            headers:{
+                'content-type':'application/json',
+            },
+            body:JSON.stringify(expense)
+        }).then(res=>{
+            if(!res.ok) {
+                return res.json().then(e=> Promise.reject(e))
+            }
+            return res.json()
         })
     }
+
     deleteCategory = (category)=>{
         const currentCategories= [...this.state.trafus_categories]
         currentCategories.forEach(cat=>{
@@ -154,9 +145,8 @@ class App extends Component{
         const contextValue = {
             ...this.state
         }
-        
         contextValue.addCategory=this.addCategoryAPI
-        contextValue.addExpense=this.addExpense
+        contextValue.addExpense=this.addExpenseApi
         contextValue.editExpense = this.editExpense
         contextValue.editCategory = this.editCategory
         contextValue.deleteCategory=this.deleteCategory
