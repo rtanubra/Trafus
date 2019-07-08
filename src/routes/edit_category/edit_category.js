@@ -26,10 +26,18 @@ class EditCategory extends Component{
         const category = this.context.trafus_categories.find(cat=>{
             return cat.id === parseInt(categoryId)
         })
-        this.setState({
-            name:category.name,
-            budget:category.budget
-        })
+        if (!category){
+            this.setState({
+               success:true
+            })
+        }
+        else {
+            this.setState({
+                name:category.name,
+                budget:category.budget
+            })
+        }
+        
     }
     handleNameChange = (event)=>{
         const name = event.target.value
@@ -81,15 +89,16 @@ class EditCategory extends Component{
     }
     handleSubmit=(e)=>{
         e.preventDefault()
-
         this.context.editCategory({
             name:this.state.name,
             budget: parseFloat(this.state.budget),
             id: this.props.match.params.categoryId
         })
+        
         this.setState({
-            success:true
+                success:true
         })
+        
     }
     handleDelete = ()=>{
         const category = {
@@ -108,6 +117,7 @@ class EditCategory extends Component{
         if (this.state.success){
             return <Redirect to={`/${userId}/${teamId}/`} />
         }
+ 
         return (
             <div>
                 <h2>Edit - {this.state.name}</h2>
