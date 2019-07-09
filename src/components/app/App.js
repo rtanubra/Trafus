@@ -44,14 +44,8 @@ class App extends Component{
             console.log(err)
         })
     }
-
-    componentDidMount(){
+    fetchExpenses(){
         const base_url = process.env.REACT_APP_BASE_URL_DEV
-        const team = 1 
-        const final_url = `${base_url}categories/${team}/`
-
-        this.fetchCategories(1)
-        
         fetch(`${base_url}expenses/`).then(response=>{
             if(response.ok){
                 return response.json()
@@ -63,10 +57,16 @@ class App extends Component{
             this.setState({
                 trafus_expenses:[...respJson]
             })
-        }) 
+        })
+    }
+    componentDidMount(){
+        const base_url = process.env.REACT_APP_BASE_URL_DEV
+        const team = 1 
+        this.fetchCategories(team)
+        this.fetchExpenses()
     }
 
-    addCategoryAPI = (category)=>{
+    addCategoryApi = (category)=>{
         const base_url =process.env.REACT_APP_BASE_URL_DEV
         const team = 1
         console.log(category)
@@ -87,8 +87,7 @@ class App extends Component{
     editCategoryApi = (category)=>{
         const base_url =process.env.REACT_APP_BASE_URL_DEV
         const url = `${base_url}categories/category/${category.id}/`
-        console.log('prior to fetch')
-        return fetch(url,{
+        fetch(url,{
             method:'PATCH',
             headers:{'content-type':'application/json'},
             body:JSON.stringify(category)
@@ -97,6 +96,17 @@ class App extends Component{
         })
     }
 
+    editExpenseApi = (expense)=>{
+        const base_url =process.env.REACT_APP_BASE_URL_DEV
+        const url = `${base_url}expenses/expense/${expense.id}/`
+        fetch(url,{
+            method:'PATCH',
+            headers:{'content-type':'application/json'},
+            body:JSON.stringify(expense)
+        }).then(()=>{
+            this.fetchExpenses()
+        })
+    }
     editExpense = (expense)=>{
         const currentExpenses = [...this.state.trafus_expenses]
 
@@ -112,7 +122,7 @@ class App extends Component{
 
     }
     
-    
+
     addExpenseApi= (expense)=>{
         const base_url =process.env.REACT_APP_BASE_URL_DEV
         return fetch(`${base_url}expenses/`,{
@@ -156,9 +166,9 @@ class App extends Component{
         const contextValue = {
             ...this.state
         }
-        contextValue.addCategory=this.addCategoryAPI
+        contextValue.addCategory=this.addCategoryApi
         contextValue.addExpense=this.addExpenseApi
-        contextValue.editExpense = this.editExpense
+        contextValue.editExpense = this.editExpenseApi
         contextValue.editCategory = this.editCategoryApi
         contextValue.deleteCategory=this.deleteCategory
         contextValue.deleteExpense=this.deleteExpense
