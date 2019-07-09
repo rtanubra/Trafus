@@ -1,23 +1,13 @@
 import React, {Component} from 'react'
 
 class CategorySummaryTable extends Component {
-    calculateCurrentExpense(category,expenses){
-        let spent = 0
-        expenses.forEach(expense=>{
-            if(expense.category_id === category.id ){
-                spent += expense.expense
-            }
-        })
-        return spent
-
-    }
     roundMe = (number)=>{
         return Math.round(number * 100)/100
     }
     render(){
-
-        const current_expense = this.calculateCurrentExpense(this.props.category,this.props.expenses)
-        const remaining = this.props.category.budget - current_expense
+        const budget = this.roundMe(this.props.budget)
+        const expense = this.roundMe(this.props.current_expense)
+        const remaining = this.roundMe(budget-expense)
         return(
             <table>
                 <thead>
@@ -29,9 +19,9 @@ class CategorySummaryTable extends Component {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{this.roundMe(this.props.category.budget)}</td>
-                        <td>{this.roundMe(current_expense)}</td>
-                        <td>{this.roundMe(remaining)}</td>
+                        <td>{budget}</td>
+                        <td>{expense}</td>
+                        <td>{remaining}</td>
                     </tr>
                 </tbody>
             </table>

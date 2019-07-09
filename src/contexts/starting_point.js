@@ -43,6 +43,7 @@ const starting_context = {
         */
     ]
     ,trafus_expenses:[
+        /*
         {
             "name":"Italian",
             "expense":50,
@@ -92,7 +93,7 @@ const starting_context = {
             "category_id":1,
             "active":true
         }
-    ]
+    */]
 }
 
 export default starting_context

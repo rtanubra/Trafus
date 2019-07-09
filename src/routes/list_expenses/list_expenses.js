@@ -12,6 +12,17 @@ class ListExpenses extends Component{
         categories: [...this.context.trafus_categories],
         expenses:[...this.context.trafus_expenses]
     }
+    calculateCurrentExpense(category,expenses){
+        let spent = 0
+        expenses.forEach(expense=>{
+            if(expense.category_id == category.id ){
+                spent += expense.expense
+            }
+        })
+        return spent
+
+    }
+
 
     render(){
         const {userId,categoryId, teamId} = this.props.match.params
@@ -29,12 +40,15 @@ class ListExpenses extends Component{
         const expenseListDisplay = expenseList.map(expense=>{
             return <Expense userId={userId} categoryId={categoryId} teamId={teamId}  key={`expense_${expense.id}`} expense={expense}/>
         })
+        const current_expense= this.calculateCurrentExpense(category,expenseList)
+
+        console.log(category)
         if (category){  
             return (
                 <div>
                     <h2>{`${team.name}`}</h2> 
                     <h3>{`${category.name}`}</h3>
-                    <CategorySummaryTable category ={category} expenses={this.state.expenses} />
+                    <CategorySummaryTable budget ={category.budget} current_expense={current_expense} />
                     <ul>{expenseListDisplay}</ul>
                     <Link to={`/${userId}/${teamId}/${categoryId}/add_expense`}>
                         <ButtonTemplate className="css_add_expense" label="Add an Expense"/>

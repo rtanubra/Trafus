@@ -40,6 +40,7 @@ class App extends Component{
             this.setState({
                 trafus_categories:[...respJson]
             })
+            this.fetchExpenses()
         }).catch(err=>{
             console.log(err)
         })
@@ -60,10 +61,8 @@ class App extends Component{
         })
     }
     componentDidMount(){
-        const base_url = process.env.REACT_APP_BASE_URL_DEV
         const team = 1 
         this.fetchCategories(team)
-        this.fetchExpenses()
     }
 
     addCategoryApi = (category)=>{
@@ -77,10 +76,15 @@ class App extends Component{
                 },
                 body: JSON.stringify(category),
             })
-            .then(res =>
-                (!res.ok)
-                ? res.json().then(e => Promise.reject(e))
-                : res.json()
+            .then(res =>{
+                if (!res.ok){
+                   return res.json().then(e => Promise.reject(e)) 
+                }
+                else{
+                    this.fetchCategories(1)
+                    return res.json()
+                }
+            }
         )
     }
 
@@ -107,22 +111,7 @@ class App extends Component{
             this.fetchExpenses()
         })
     }
-    editExpense = (expense)=>{
-        const currentExpenses = [...this.state.trafus_expenses]
-
-        currentExpenses.forEach(exp=>{
-            if (exp.id === parseInt(expense.id)){
-                exp.name = expense.name
-                exp.expense = expense.expense
-            }
-        })
-        this.setState({
-            trafus_expenses:[...currentExpenses]
-        })
-
-    }
     
-
     addExpenseApi= (expense)=>{
         const base_url =process.env.REACT_APP_BASE_URL_DEV
         return fetch(`${base_url}expenses/`,{
@@ -135,19 +124,34 @@ class App extends Component{
             if(!res.ok) {
                 return res.json().then(e=> Promise.reject(e))
             }
+            this.fetchExpenses()
             return res.json()
         })
     }
 
-    deleteCategory = (category)=>{
-        const currentCategories= [...this.state.trafus_categories]
-        currentCategories.forEach(cat=>{
-            if (cat.id === parseInt(category.id)){
-                cat.active= false
+    deleteCategoryApi = (category)=>{
+        const base_url =process.env.REACT_APP_BASE_URL_DEV
+        const url = `${base_url}categories/category/${category.id}/`
+        fetch(url,{
+            method:'DELETE',
+        }).then(res=>{
+            if(!res.ok){
+                return res.json().then(e=> Promise.reject(e))
             }
+            this.fetchCategories(1)
         })
-        this.setState({
-            trafus_categories:[...currentCategories]
+    }
+
+    deleteExpenseApi= (expense)=>{
+        const base_url =process.env.REACT_APP_BASE_URL_DEV
+        const url = `${base_url}expenses/expense/${expense.id}/`
+        fetch(url,{
+            method:'DELETE'
+        }).then(res=>{
+            if(!res.ok){
+                return res.json().then(e=>Promise.reject(e))
+            }
+            this.fetchExpenses()
         })
     }
     deleteExpense = (expense)=>{
@@ -170,8 +174,8 @@ class App extends Component{
         contextValue.addExpense=this.addExpenseApi
         contextValue.editExpense = this.editExpenseApi
         contextValue.editCategory = this.editCategoryApi
-        contextValue.deleteCategory=this.deleteCategory
-        contextValue.deleteExpense=this.deleteExpense
+        contextValue.deleteCategory=this.deleteCategoryApi
+        contextValue.deleteExpense=this.deleteExpenseApi
         return (
           <TrafusContext.Provider value={contextValue}>
             <h1>Trafus-placeholder here</h1>
