@@ -14,10 +14,10 @@ import EditCategory from '../../routes/edit_category/edit_category'
 import TrafusContext from '../../contexts/trafus_context'
 import starting_context from "../../contexts/starting_point"
 
-//service
-//import ApiService from '../../services/api-services'
-
 import './App.css'
+
+//config use
+import config from '../../config'
 
 class App extends Component{
     state = {
@@ -25,7 +25,7 @@ class App extends Component{
     }
     
     fetchCategories(team_id){
-        const base_url = process.env.REACT_APP_BASE_URL_DEV
+        const base_url = config.API_ENDPOINT
         const team = team_id 
         const final_url = `${base_url}categories/${team}/`
         
@@ -46,7 +46,7 @@ class App extends Component{
         })
     }
     fetchExpenses(){
-        const base_url = process.env.REACT_APP_BASE_URL_DEV
+        const base_url = config.API_ENDPOINT
         fetch(`${base_url}expenses/`).then(response=>{
             if(response.ok){
                 return response.json()
@@ -66,7 +66,7 @@ class App extends Component{
     }
 
     addCategoryApi = (category)=>{
-        const base_url =process.env.REACT_APP_BASE_URL_DEV
+        const base_url =config.API_ENDPOINT
         const team = 1
         console.log(category)
         return fetch(`${base_url}categories/${team}/`, {
@@ -89,7 +89,7 @@ class App extends Component{
     }
 
     editCategoryApi = (category)=>{
-        const base_url =process.env.REACT_APP_BASE_URL_DEV
+        const base_url =config.API_ENDPOINT
         const url = `${base_url}categories/category/${category.id}/`
         fetch(url,{
             method:'PATCH',
@@ -101,7 +101,7 @@ class App extends Component{
     }
 
     editExpenseApi = (expense)=>{
-        const base_url =process.env.REACT_APP_BASE_URL_DEV
+        const base_url = config.API_ENDPOINT
         const url = `${base_url}expenses/expense/${expense.id}/`
         fetch(url,{
             method:'PATCH',
@@ -113,7 +113,8 @@ class App extends Component{
     }
     
     addExpenseApi= (expense)=>{
-        const base_url =process.env.REACT_APP_BASE_URL_DEV
+        //const base_url =process.env.REACT_APP_BASE_URL_DEV
+        const base_url = config.API_ENDPOINT
         return fetch(`${base_url}expenses/`,{
             method:"POST",
             headers:{
@@ -130,7 +131,7 @@ class App extends Component{
     }
 
     deleteCategoryApi = (category)=>{
-        const base_url =process.env.REACT_APP_BASE_URL_DEV
+        const base_url =config.API_ENDPOINT
         const url = `${base_url}categories/category/${category.id}/`
         fetch(url,{
             method:'DELETE',
@@ -143,7 +144,7 @@ class App extends Component{
     }
 
     deleteExpenseApi= (expense)=>{
-        const base_url =process.env.REACT_APP_BASE_URL_DEV
+        const base_url =config.API_ENDPOINT
         const url = `${base_url}expenses/expense/${expense.id}/`
         fetch(url,{
             method:'DELETE'
