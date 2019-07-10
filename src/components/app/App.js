@@ -28,6 +28,7 @@ class App extends Component{
         const base_url = config.API_ENDPOINT
         const team = team_id 
         const final_url = `${base_url}categories/${team}/`
+        console.log(final_url)
         
         fetch(final_url).then(response=>{
             if (response.ok){
@@ -78,7 +79,7 @@ class App extends Component{
             })
             .then(res =>{
                 if (!res.ok){
-                   return res.json().then(e => Promise.reject(e)) 
+                   return res.json().then(jsonRes=>{console.log(jsonRes)}) 
                 }
                 else{
                     this.fetchCategories(1)
@@ -171,6 +172,8 @@ class App extends Component{
         const contextValue = {
             ...this.state
         }
+        contextValue.fetchCategories=this.fetchCategories
+        contextValue.fetchExpenses=this.fetchExpenses
         contextValue.addCategory=this.addCategoryApi
         contextValue.addExpense=this.addExpenseApi
         contextValue.editExpense = this.editExpenseApi

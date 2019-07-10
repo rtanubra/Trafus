@@ -13,10 +13,13 @@ class EditExpense extends Component{
         const expense = this.context.trafus_expenses.find(exp=>{
             return exp.id === parseInt(this.props.match.params.expenseId)
         })
-        this.setState({
-            name:expense.name,
-            expense:expense.expense
-        })
+        if (expense){
+            this.setState({
+                name:expense.name,
+                expense:expense.expense
+            })
+        }
+        
     }
 
     state = {
@@ -119,6 +122,9 @@ class EditExpense extends Component{
         const category = this.context.trafus_categories.find(cat=>{
             return cat.id === parseInt(categoryId)
         })
+        if (!category){
+            return <Redirect to={`/${userId}/${teamId}/${categoryId}`} />
+        }
         if(this.state.success){
             return <Redirect to={`/${userId}/${teamId}/${categoryId}`} />
         }
