@@ -26,6 +26,14 @@ button.css_add_expense:hover{
     color:white;
     background-color: blue;
 }
+button.css_add_expense1{
+    color:blue
+}
+button.css_add_expense1:hover{
+    color:white;
+    background-color: blue;
+}
+
 button.css_expense_detail{
     color:green;
 }
