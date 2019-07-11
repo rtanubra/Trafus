@@ -26,12 +26,12 @@ button.css_add_expense:hover{
     color:white;
     background-color: blue;
 }
-button.css_add_expense1{
-    color:blue
+button.css_edit_category{
+    color:grey;
 }
-button.css_add_expense1:hover{
+button.css_edit_category:hover{
     color:white;
-    background-color: blue;
+    background-color: grey;
 }
 
 button.css_expense_detail{

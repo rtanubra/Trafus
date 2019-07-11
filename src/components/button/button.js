@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import './button'
+import './button.css'
 
 class ButtonTemplate extends Component{
 

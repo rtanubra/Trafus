@@ -22,7 +22,7 @@ class Category extends Component{
             <section className="category" >
                 <h3>{this.props.category.name}</h3>
                 <Link to={`/${this.props.userId}/${this.props.teamId}/${this.props.category.id}/edit`}>
-                    <ButtonTemplate className="css_add_expense1" label={`Edit ${this.props.category.name}`}/>
+                    <ButtonTemplate className="css_edit_category" label={`Edit ${this.props.category.name}`}/>
                 </Link>
                 <Link to={`/${this.props.userId}/${this.props.teamId}/${this.props.category.id}/add_expense`}>
                     <ButtonTemplate className="css_add_expense" label="Add an Expense"/>
