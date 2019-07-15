@@ -10,9 +10,16 @@
     padding:20px;
     margin-left:20px;
 }
-.topnav a {
-    float:left;
+.css-auth a {
+    float:right;
     text-align:center;
-    margin:20px;
-    color:rgb(204,255,210)
+    padding:20px;
+    margin-top:40px;
+    margin-right:20px;
+    color:rgb(204,255,210);
+    text-decoration:none;
+}
+.css-auth a:hover{
+    background-color:white;
+    color:black;
 }

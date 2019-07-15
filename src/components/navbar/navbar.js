@@ -8,6 +8,10 @@ class NavBar extends Component{
         return (
         <div className="topnav">
             <Link to={`/`} ><h1>Trafus</h1></Link>
+            <div className='css-auth'>
+                <Link>Login</Link>
+                <Link>Logout</Link>
+            </div>
         </div>
     )}
 }
