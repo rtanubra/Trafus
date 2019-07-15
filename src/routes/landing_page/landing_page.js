@@ -18,7 +18,7 @@ class LandingPage extends Component{
                     <p>
                         Build your team budget and let Trafus track it for you! Simply follow the steps below.
                     </p>
-                    <ol>
+                    <ol className="css-landing-page">
                         <li>Create your Trafus Team.</li>
                         <li>Create your budget Categories for your Team.</li>
                         <li>Add Expenses to each Category as you spend.</li>
@@ -28,7 +28,7 @@ class LandingPage extends Component{
                 </section>
                 <section>
                     <h2>Demo User</h2>
-                    <p>To give trafus a try click the login button below. Then you can dive right into Trafus as a team member of the test_1 team</p>
+                    <p>To give trafus a try click the login button below. Then you can dive right into Trafus as a team member of the Team 1 </p>
                     <form onSubmit={this.handleSubmit}>
                         <label htmlFor="demo_user">Username</label>
                         <input type="text" value="user_1" readOnly id="demo_user" name="demo_user"/>

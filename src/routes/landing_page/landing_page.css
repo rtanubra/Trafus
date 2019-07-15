@@ -14,8 +14,7 @@ nav {
 }
 
 body {
-  font-family: "Open Sans",
-  sans-serif; 
+  font-family: "Open Sans",sans-serif; 
   font-size: 20px;
   color: #444;
   text-align: center;
@@ -35,4 +34,7 @@ section {
 
 section:nth-child(even) {
   background-color: #ddd;
+}
+.css-landing-page li{
+  list-style:none;
 }
