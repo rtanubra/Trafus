@@ -1,6 +1,6 @@
 const starting_context = {
     trafus_teams : [{
-        "name":'test_1_team',
+        "name":'Team 1',
         "id":1
     }],
     trafus_users :[

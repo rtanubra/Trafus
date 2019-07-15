@@ -1,0 +1,18 @@
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+}
+
+.topnav h1 {
+    color:white;
+    float:left;
+    text-align:center;
+    padding:20px;
+    margin-left:20px;
+}
+.topnav a {
+    float:left;
+    text-align:center;
+    margin:20px;
+    color:rgb(204,255,210)
+}

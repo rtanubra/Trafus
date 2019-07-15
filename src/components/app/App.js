@@ -16,7 +16,7 @@ import starting_context from "../../contexts/starting_point"
 
 import './App.css'
 
-import navBar from '../navbar/navbar'
+import NavBar from '../navbar/navbar'
 
 //config use
 import config from '../../config'
@@ -71,7 +71,6 @@ class App extends Component{
     addCategoryApi = (category)=>{
         const base_url =config.API_ENDPOINT
         const team = 1
-        console.log(category)
         return fetch(`${base_url}categories/${team}/`, {
                 method: 'POST',
                 headers: {
@@ -184,7 +183,7 @@ class App extends Component{
         contextValue.deleteExpense=this.deleteExpenseApi
         return (
           <TrafusContext.Provider value={contextValue}>
-            <h1>Trafus-placeholder here</h1>
+            <NavBar/>
             <Switch>
                 <Route
                     exact
