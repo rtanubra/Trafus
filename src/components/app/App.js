@@ -16,6 +16,8 @@ import starting_context from "../../contexts/starting_point"
 
 import './App.css'
 
+import navBar from '../navbar/navbar'
+
 //config use
 import config from '../../config'
 
