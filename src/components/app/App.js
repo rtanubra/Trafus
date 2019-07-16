@@ -9,6 +9,7 @@ import AddExpense from '../../routes/add_expense/add_expense'
 import LandingPage from '../../routes/landing_page/landing_page'
 import EditExpense from '../../routes/edit_expense/edit_expense'
 import EditCategory from '../../routes/edit_category/edit_category'
+import LoginPage from '../../routes/login_page/login_page'
 
 //context 
 import TrafusContext from '../../contexts/trafus_context'
@@ -185,6 +186,11 @@ class App extends Component{
           <TrafusContext.Provider value={contextValue}>
             <NavBar/>
             <Switch>
+                <Route
+                    exact
+                    path={'/login'}
+                    component={LoginPage}
+                />
                 <Route
                     exact
                     path={'/:userId/:teamId'}

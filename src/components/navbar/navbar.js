@@ -9,8 +9,8 @@ class NavBar extends Component{
         <div className="topnav">
             <Link to={`/`} ><h1>Trafus</h1></Link>
             <div className='css-auth'>
-                <Link>Login</Link>
-                <Link>Logout</Link>
+                <Link to={'/login'}>Login</Link>
+                <Link to={''} >Logout</Link>
             </div>
         </div>
     )}
