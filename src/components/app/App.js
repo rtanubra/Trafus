@@ -26,8 +26,16 @@ class App extends Component{
     state = {
         ...starting_context
     }
-    
-    fetchCategories(team_id){
+    toggleLogin=(message)=>{
+        //message is true to login and false to logout
+        console.log(message,"here at toggleLogin")
+        if(message){
+            this.setState({loggedIn:true})
+        }else{
+            this.setState({loggedIn:false})
+        }
+    }
+    fetchCategories=(team_id)=>{
         const base_url = config.API_ENDPOINT
         const team = team_id 
         const final_url = `${base_url}categories/${team}/`
@@ -49,7 +57,7 @@ class App extends Component{
             console.log(err)
         })
     }
-    fetchExpenses(){
+    fetchExpenses=()=>{
         const base_url = config.API_ENDPOINT
         fetch(`${base_url}expenses/`).then(response=>{
             if(response.ok){
@@ -182,6 +190,7 @@ class App extends Component{
         contextValue.editCategory = this.editCategoryApi
         contextValue.deleteCategory=this.deleteCategoryApi
         contextValue.deleteExpense=this.deleteExpenseApi
+        contextValue.toggleLogin = this.toggleLogin
         return (
           <TrafusContext.Provider value={contextValue}>
             <NavBar/>

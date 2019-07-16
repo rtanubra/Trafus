@@ -1,4 +1,5 @@
 const starting_context = {
+    loggedIn:false,
     trafus_teams : [{
         "name":'Team 1',
         "id":1

@@ -1,6 +1,7 @@
 import React from 'react'
 
 const TrafusContext = React.createContext({
+    loggedIn:false,
     trafus_teams : "",
     trafus_users :"",
     trafus_categories :"",

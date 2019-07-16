@@ -2,10 +2,28 @@ import React, {Component} from  'react'
 import {Link} from 'react-router-dom'
 import ButtonTemplate from '../../components/button/button'
 import './landing_page.css'
+import TrafusContext from '../../contexts/trafus_context'
+import config from '../../config'
+import TokenService from '../../services/token-services'
 
 class LandingPage extends Component{
+    static contextType = TrafusContext
+    handleLogin=()=>{
+        const base_url = config.API_ENDPOINT
+        return fetch(`${base_url}auth/login/`, {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({user_name:window.btoa("dunder"),password:window.btoa("hello_dunder")}),
+        }).then(res=>res.json()).then(jsonRes=>{
+            TokenService.saveAuthToken(jsonRes.authToken)
+            this.context.toggleLogin(true)
+        })
+    }
     handleSubmit = (event)=>{
         event.preventDefault()
+        this.handleLogin()
     }
     render(){
         return (
@@ -30,13 +48,13 @@ class LandingPage extends Component{
                     <h2>Demo User</h2>
                     <p>To give trafus a try click the login button below. Then you can dive right into Trafus as a team member of the Team 1 </p>
                     <form onSubmit={this.handleSubmit}>
-                        <label htmlFor="demo_user">Username</label>
+                        <label htmlFor="demo_user">dunder</label>
                         <input type="text" value="user_1" readOnly id="demo_user" name="demo_user"/>
                         <br/>
                         <label htmlFor="demo_password">Password</label>
-                        <input type="password" value="password1" readOnly name="demo_password" id="demo_password"/>
+                        <input type="password" value="hello_dunder" readOnly name="demo_password" id="demo_password"/>
                         <br/>
-                        <Link to={`/1/1`}>
+                        <Link onClick={()=>{this.handleLogin()}} to={`/1/1`}>
                             <ButtonTemplate type="submit" className='css_submit_button'  label="Login as user_1 !"/>
                         </Link>
                     </form>

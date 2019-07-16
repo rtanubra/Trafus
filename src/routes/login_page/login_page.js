@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
+import {Link,Redirect} from 'react-router-dom'
 import ErrorMessage from '../../components/error/ErrorMessage'
 import TrafusContext from '../../contexts/trafus_context'
 import ButtonTemplate from '../../components/button/button'
@@ -7,6 +7,8 @@ import config from '../../config'
 import TokenService from '../../services/token-services'
 
 class LoginPage extends Component{
+    static contextType=TrafusContext
+
     handleSubmit= (e)=>{
         e.preventDefault()
         const base_url = config.API_ENDPOINT
@@ -44,12 +46,13 @@ class LoginPage extends Component{
                 else{
                     return res.json().then(jsonRes=>{
                         console.log(jsonRes)
+                        this.context.toggleLogin(true)
                         TokenService.saveAuthToken(jsonRes.authToken)
+                        this.setState({success:true})
                     })
                 }
             }
         )
-        
     }
     handlePasswordChange= (event)=>{
         const password = event.target.value
@@ -67,6 +70,7 @@ class LoginPage extends Component{
             password,
             error:{error_user_name,error_password,error_main},
             error_message:{error_message_user_name,error_message_password,error_message_main}
+            
         })
     }
     //static contextType = TrafusContext
@@ -97,7 +101,8 @@ class LoginPage extends Component{
                 error_message_user_name,
                 error_message_password,
                 error_message_main
-            }
+            },
+            success:false
         })
     }
     state = {
@@ -116,6 +121,9 @@ class LoginPage extends Component{
         success:false
     }
     render(){
+        if (this.state.success){
+            return <Redirect to={`/${1}/${1}/`}/>
+        }
         return (
             <div>
                 <h2>Welcome Back</h2>
