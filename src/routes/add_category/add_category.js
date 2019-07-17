@@ -13,7 +13,7 @@ class AddCategory extends Component {
         const team =this.context.trafus_teams.find(team=>{
             return team.id === parseInt(teamId)
         })
-        if (!this.context.loggedIn){
+        if (!this.context.loggedIn && !window.localStorage.getItem('authToken')){
             return <Redirect to=""/>
         }
         return (

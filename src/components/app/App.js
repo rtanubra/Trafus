@@ -177,6 +177,8 @@ class App extends Component{
         const contextValue = {
             ...this.state
         }
+        const loggedIn = window.localStorage.getItem('authToken')? true:false
+        contextValue.loggedIn=loggedIn
         contextValue.fetchCategories=this.fetchCategories
         contextValue.fetchExpenses=this.fetchExpenses
         contextValue.addCategory=this.addCategoryApi

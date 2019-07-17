@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link,Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import ErrorMessage from '../../components/error/ErrorMessage'
 import TrafusContext from '../../contexts/trafus_context'
 import ButtonTemplate from '../../components/button/button'

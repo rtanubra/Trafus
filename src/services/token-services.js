@@ -1,9 +1,9 @@
 const TokenService = {
     saveAuthToken(authToken){
-        window.sessionStorage.setItem('authToken', authToken)
+        window.localStorage.setItem('authToken', authToken)
     },
     deleteAutthToken(){
-        window.sessionStorage.removeItem('authToken')
+        window.localStorage.removeItem('authToken')
     }
 }
 

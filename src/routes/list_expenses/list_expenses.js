@@ -15,7 +15,7 @@ class ListExpenses extends Component{
     calculateCurrentExpense(category,expenses){
         let spent = 0
         expenses.forEach(expense=>{
-            if(expense.category_id == category.id ){
+            if(expense.category_id === category.id ){
                 spent += expense.expense
             }
         })
