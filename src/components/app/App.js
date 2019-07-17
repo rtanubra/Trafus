@@ -28,7 +28,6 @@ class App extends Component{
     }
     toggleLogin=(message)=>{
         //message is true to login and false to logout
-        console.log(message,"here at toggleLogin")
         if(message){
             this.setState({loggedIn:true})
         }else{
@@ -39,7 +38,6 @@ class App extends Component{
         const base_url = config.API_ENDPOINT
         const team = team_id 
         const final_url = `${base_url}categories/${team}/`
-        console.log(final_url)
         
         fetch(final_url).then(response=>{
             if (response.ok){
@@ -47,8 +45,7 @@ class App extends Component{
             }
             throw new Error(response.statusText)
         }).then(respJson=>{
-            console.log(`fetched categories`)
-            console.log(respJson)
+
             this.setState({
                 trafus_categories:[...respJson]
             })
@@ -65,8 +62,7 @@ class App extends Component{
             }
             throw new Error(response.statusText)
         }).then(respJson=>{
-            console.log(`fetched expenses `)
-            console.log(respJson)
+
             this.setState({
                 trafus_expenses:[...respJson]
             })
@@ -89,7 +85,7 @@ class App extends Component{
             })
             .then(res =>{
                 if (!res.ok){
-                   return res.json().then(jsonRes=>{console.log(jsonRes)}) 
+                   return res.json().then(jsonRes=>{}) 
                 }
                 else{
                     this.fetchCategories(1)
@@ -137,7 +133,6 @@ class App extends Component{
                 return res.json().then(e=> Promise.reject(e))
             }
             this.fetchExpenses()
-            return res.json()
         })
     }
 

@@ -113,7 +113,9 @@ class EditCategory extends Component{
     }
     render(){
         const {userId, teamId} = this.props.match.params
-
+        if (!this.context.loggedIn){
+            return <Redirect to=""/>
+        }
         if (this.state.success){
             return <Redirect to={`/${userId}/${teamId}/`} />
         }

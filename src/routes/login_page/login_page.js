@@ -45,7 +45,6 @@ class LoginPage extends Component{
                 }
                 else{
                     return res.json().then(jsonRes=>{
-                        console.log(jsonRes)
                         this.context.toggleLogin(true)
                         TokenService.saveAuthToken(jsonRes.authToken)
                         this.setState({success:true})

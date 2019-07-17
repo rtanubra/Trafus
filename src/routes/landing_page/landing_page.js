@@ -1,5 +1,5 @@
 import React, {Component} from  'react'
-import {Link} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import ButtonTemplate from '../../components/button/button'
 import './landing_page.css'
 import TrafusContext from '../../contexts/trafus_context'
@@ -26,6 +26,9 @@ class LandingPage extends Component{
         this.handleLogin()
     }
     render(){
+        if(this.context.loggedIn){
+            return <Redirect to="/1/1/"/>
+        }
         return (
             <div>
                 <header role="banner">
@@ -54,9 +57,7 @@ class LandingPage extends Component{
                         <label htmlFor="demo_password">Password</label>
                         <input type="password" value="hello_dunder" readOnly name="demo_password" id="demo_password"/>
                         <br/>
-                        <Link onClick={()=>{this.handleLogin()}} to={`/1/1`}>
-                            <ButtonTemplate type="submit" className='css_submit_button'  label="Login as user_1 !"/>
-                        </Link>
+                        <ButtonTemplate onClick={this.handleLogin} type="submit" className='css_submit_button'  label="Login as user_1 !"/>
                     </form>
                 </section>
             </div>

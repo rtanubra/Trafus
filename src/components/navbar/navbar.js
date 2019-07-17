@@ -1,6 +1,6 @@
 import './navbar.css'
 import React, {Component} from 'react'
-import {Link, Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import TrafusContext from '../../contexts/trafus_context'
 import TokenService from '../../services/token-services'
 

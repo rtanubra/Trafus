@@ -3,7 +3,7 @@ import './list_categories.css'
 import TrafusContext from "../../contexts/trafus_context"
 import Category from "../../components/category/category"
 import TeamSummary from '../../components/team/team_summary'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 
 
 class ListCategories extends Component {
@@ -20,6 +20,9 @@ class ListCategories extends Component {
             return <Category userId={userId} teamId={teamId}  category={category} key={`category_${category.id}`} expenses={this.context.trafus_expenses} />
         })
         const team = this.context.trafus_teams.filter(team=>{return team.id=== parseInt(teamId) })[0]
+        if (!this.context.loggedIn){
+            return <Redirect to={""}/>
+        }
         return (
             <div>
                 <h2>{`Current Budget for ${team.name}`}</h2>

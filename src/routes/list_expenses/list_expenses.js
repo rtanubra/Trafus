@@ -3,7 +3,7 @@ import TrafusContext from "../../contexts/trafus_context"
 import CategorySummaryTable from '../../components/category/category_summary'
 import Expense from "../../components/expense/expense"
 import './list_expenses.css'
-import {Link} from 'react-router-dom'
+import {Link,Redirect} from 'react-router-dom'
 import ButtonTemplate from "../../components/button/button"
 class ListExpenses extends Component{
     static contextType = TrafusContext
@@ -42,7 +42,9 @@ class ListExpenses extends Component{
         })
         const current_expense= this.calculateCurrentExpense(category,expenseList)
 
-        console.log(category)
+        if (!this.context.loggedIn){
+            return <Redirect to=""/>
+        }
         if (category){  
             return (
                 <div>
