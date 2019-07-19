@@ -109,7 +109,7 @@ class AddExpenseForm extends Component{
                         <input required type="number" min="0" max="100000" step="0.01" onChange={this.handleExpenseChange} name="js_expense_amount" id="js_expense_amount" value={this.state.expense} />
                         <br/>
                         <ButtonTemplate type="submit" className="css_submit_button" label="Submit"  />
-                        <Link to={`/${userId}/${teamId}/${categoryId}`} ><ButtonTemplate className="css_back_button" label={`Back to ${category.name}`}/></Link>
+                        <Link to={`/${userId}/${teamId}/${categoryId}`} ><ButtonTemplate className="css_back_button" label={`Back to Expenses`}/></Link>
                     </fieldset>
                 </form>)
     }
