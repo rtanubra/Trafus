@@ -1,7 +1,7 @@
 const ValidateHelper = {
     nameCheck(name){
-        if (name.length<4 || name.length>20){
-            return [false,"Should be between 4-20 characters"]
+        if (name.length<3 || name.length >15){
+            return [false,"Should be between 3-15 characters"]
         }
         if (name.startsWith(" ")|| name.endsWith(" ")){
             return [false,"Should not begin or end with a space ' '. "]
@@ -15,7 +15,7 @@ const ValidateHelper = {
         if(!patAlpha.test(name)){
             return [false, "Should contain alphabetical characters"]
         }
-        const patBadCharacters = /[^a-zA-Z _. ]/
+        const patBadCharacters = /[^a-zA-Z _. 0-9]/
         if(patBadCharacters.test(name)){
             return [false,"Should only contain alphanumeric, underscores '_', periods'.' spaces ' ' ."]
         }
@@ -37,7 +37,7 @@ const ValidateHelper = {
         if(!patAlpha.test(name)){
             return [false, "Should contain alphabetical characters"]
         }
-        const patBadCharacters = /[^a-zA-Z _.]/
+        const patBadCharacters = /[^a-zA-Z _.0-9]/
         if(patBadCharacters.test(name)){
             return [false,"Should only contain alphanumeric, underscores '_', periods'.'."]
         }

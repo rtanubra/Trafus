@@ -5,6 +5,8 @@ import ErrorMessage from '../error/ErrorMessage'
 import ButtonTemplate from '../button/button'
 import TrafusContext from '../../contexts/trafus_context'
 
+import ValidateHelper from '../../services/validator'
+
 class AddExpenseForm extends Component{
     static contextType = TrafusContext
 
@@ -29,13 +31,10 @@ class AddExpenseForm extends Component{
         let error_message_name = ""
         let error_message_expense = this.state.error_message.error_message_expense
         
-        if(name.length<3){
-            error_name=true
-            error_message_name="Expense Name should be longer than 3 Characters"
-        }
-        if(name.startsWith(" ") || name.endsWith(" ")){
-            error_name=true
-            error_message_name="Expense Name cannot start or end with a ' ' space "
+        const valid = ValidateHelper.nameCheck(name)
+        if (!valid[0]){
+            error_name= true
+            error_message_name = `Expense name ${valid[1]}`
         }
 
         this.setState({

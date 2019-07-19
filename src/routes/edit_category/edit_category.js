@@ -4,6 +4,7 @@ import {Redirect,Link} from 'react-router-dom'
 
 import ButtonTemplate from '../../components/button/button'
 import ErrorMessage from '../../components/error/ErrorMessage'
+import ValidateHelper from '../../services/validator'
 
 class EditCategory extends Component{
     static contextType = TrafusContext
@@ -45,6 +46,12 @@ class EditCategory extends Component{
         let error_budget = this.state.error.error_budget
         let error_message_name = ""
         let error_message_budget= this.state.error_message.error_message_budget
+
+        const valid = ValidateHelper.nameCheck(name)
+        if (!valid[0]){
+            error_name=true
+            error_message_name = `Category name ${valid[1]}`
+        }
         if(name.length < 3){
             error_name = true
             error_message_name = "Category Name Should be longer than 3 characters"

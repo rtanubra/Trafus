@@ -4,6 +4,7 @@ import {Link,Redirect} from 'react-router-dom'
 import ErrorMessage from '../error/ErrorMessage'
 import ButtonTemplate from '../button/button'
 import TrafusContext from '../../contexts/trafus_context'
+import ValidateHelper from '../../services/validator'
 
 class AddCategoryForm extends Component{
     static contextType = TrafusContext
@@ -28,14 +29,11 @@ class AddCategoryForm extends Component{
         let error_budget = this.state.error.error_budget
         let error_message_name = ""
         let error_message_budget= this.state.error_message.error_message_budget
-        if(name.length < 3){
-            error_name = true
-            error_message_name = "Category Name Should be longer than 3 characters"
-        } 
-        if(name.startsWith(" ") || name.endsWith(" ")){
+        const valid = ValidateHelper.nameCheck(name)
+        if (!valid[0]){
             error_name=true
-            error_message_name = "Category Name should not begin or end with a ' ' space"
-        } 
+            error_message_name=`Budget name ${valid[1]}`
+        }
 
         this.setState({
             name,

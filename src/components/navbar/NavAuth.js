@@ -12,8 +12,6 @@ class NavAuth extends Component{
     }
     render(){
         if (!this.props.loggedin){
-            console.log("here")
-            console.log(this.props.loggedin)
             return(
                 <div className="topnav">
                     <Link to={`/`} ><h1>Trafus</h1></Link>
@@ -26,7 +24,6 @@ class NavAuth extends Component{
                 </div>
             )
         } else {
-            console.log('there')
             return (
                 <div className="topnav">
                     <Link to={`/`} ><h1>Trafus</h1></Link>
