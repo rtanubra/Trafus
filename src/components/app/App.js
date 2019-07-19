@@ -10,7 +10,7 @@ import LandingPage from '../../routes/landing_page/landing_page'
 import EditExpense from '../../routes/edit_expense/edit_expense'
 import EditCategory from '../../routes/edit_category/edit_category'
 import LoginPage from '../../routes/login_page/login_page'
-
+import RegisterPage from '../../routes/register_user/register'
 //context 
 import TrafusContext from '../../contexts/trafus_context'
 import starting_context from "../../contexts/starting_point"
@@ -196,6 +196,11 @@ class App extends Component{
                     exact
                     path={'/login'}
                     component={LoginPage}
+                />
+                <Route
+                    exact
+                    path={'/Register'}
+                    component={RegisterPage}
                 />
                 <Route
                     exact

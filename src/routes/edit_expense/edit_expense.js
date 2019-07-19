@@ -122,7 +122,7 @@ class EditExpense extends Component{
         const category = this.context.trafus_categories.find(cat=>{
             return cat.id === parseInt(categoryId)
         })
-        if (!this.context.loggedIn){
+        if (!window.localStorage.getItem('authToken')){
             return <Redirect to=""/>
         }
         if (!category){

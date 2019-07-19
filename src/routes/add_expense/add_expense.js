@@ -12,7 +12,7 @@ class AddExpense extends Component{
         const category = this.context.trafus_categories.find(category=>{
             return category.id === parseInt(categoryId)
         })
-        if (!this.context.loggedIn && !window.localStorage.getItem('authToken')){
+        if (!window.localStorage.getItem('authToken')){
             return <Redirect to=""/>
         }
         return (

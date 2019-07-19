@@ -20,7 +20,7 @@ class ListCategories extends Component {
             return <Category userId={userId} teamId={teamId}  category={category} key={`category_${category.id}`} expenses={this.context.trafus_expenses} />
         })
         const team = this.context.trafus_teams.filter(team=>{return team.id=== parseInt(teamId) })[0]
-        if (!this.context.loggedIn){
+        if (!window.localStorage.getItem('authToken')){
             return <Redirect to={""}/>
         }
         return (

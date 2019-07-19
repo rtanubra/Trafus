@@ -42,7 +42,7 @@ class ListExpenses extends Component{
         })
         const current_expense= this.calculateCurrentExpense(category,expenseList)
 
-        if (!this.context.loggedIn){
+        if (!window.localStorage.getItem('authToken')){
             return <Redirect to=""/>
         }
         if (category){  
