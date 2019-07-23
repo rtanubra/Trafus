@@ -5,24 +5,31 @@ import TrafusContext from '../../contexts/trafus_context'
 import ButtonTemplate from '../../components/button/button'
 import config from '../../config'
 
+
+import CreateTeam from '../../components/teams/createTeam'
+import JoinTeam from '../../components/teams/joinTeam'
+
 class TeamLanding extends Component{
+    handleCreateTeam = (team_id)=>{
+        this.setState({team_id,success:true})
+    }
+    handleJoinTeam=(team_id)=>{
+        this.setState({team_id,success:true})
+        console.log(team_id)
+    }
     state={
         teams:[],
-        user: {}
+        user: {},
+        team_id:"",
+        success:false
     }
     componentDidMount(){
         const {userId} = this.props.match.params
         const base_url = config.API_ENDPOINT
-        return fetch(`${base_url}users/`, {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify({"id":userId}),
-            })
+        fetch(`${base_url}users/${userId}`)
             .then(res =>{
                 if (!res.ok){
-                   return res.json().then(jsonRes=>{}) 
+                   return res.json()
                 }
                 else{
                     return res.json()
@@ -31,13 +38,27 @@ class TeamLanding extends Component{
         ).then(user=>{
             this.setState({user})
         })
+
+        fetch(`${base_url}teams/`)
+            .then(res=>{return res.json()}).then(teams=>{
+                this.setState({teams})
+            })
     }
     render(){
         const user = this.state.user? this.state.user.user_name : ""
+        const {userId} =this.props.match.params
+        if (this.state.success){
+            return <Redirect to={`/${this.state.user.id}/${this.state.team_id}/`} />
+        }
         return (
         <div>
             <h1>Welcome {user}</h1>
-
+            <h2>Team Options</h2>
+            <h3>Join An Existing Team</h3>
+                <JoinTeam handleJoinTeam={this.handleJoinTeam} userId={parseInt(userId)} teams={this.state.teams}/>
+            <h3>Create New Team</h3>
+                <CreateTeam userId={parseInt(userId)} handleCreateTeam={this.handleCreateTeam} />
+                <br/>
         </div>)
     }
 }

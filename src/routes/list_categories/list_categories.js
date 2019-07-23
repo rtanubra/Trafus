@@ -12,14 +12,13 @@ class ListCategories extends Component {
     render(){
         const {userId, teamId} = this.props.match.params
         const teamCategories = this.context.trafus_categories.filter(category=>{
-
             return category.team_id === parseInt(teamId)
-    
         })
         const teamCategoriesDisplayed = teamCategories.map(category=>{
             return <Category userId={userId} teamId={teamId}  category={category} key={`category_${category.id}`} expenses={this.context.trafus_expenses} />
         })
         const team = this.context.trafus_teams.filter(team=>{return team.id=== parseInt(teamId) })[0]
+        
         if (!window.localStorage.getItem('authToken')){
             return <Redirect to={""}/>
         }

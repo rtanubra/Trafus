@@ -4,7 +4,7 @@ import ErrorMessage from '../../components/error/ErrorMessage'
 import TrafusContext from '../../contexts/trafus_context'
 import ButtonTemplate from '../../components/button/button'
 import config from '../../config'
-
+import TokenService from '../../services/token-services'
 
 
 import ValidateHelper from '../../services/validator'
@@ -35,22 +35,42 @@ class RegisterPage extends Component{
                 },
                 body: JSON.stringify({user_name:user_name_encrypt,password:password_encrypt}),
             })
-            .then(res =>{
-                if (!res.ok){
-                   return res.json().then(jsonRes=>{
-                       error_main = true
-                       error_message_main=jsonRes.error
-                       this.setState({
-                           error:{error_user_name,error_main,error_password},
-                           error_message:{error_message_user_name,error_message_password,error_message_main}
-                       })
-                    }) 
-                }
-                else{
-                    this.setState({success:true})
-                }
+            .then(res =>res.json()
+        ).then(jsonRes=>{
+            if (jsonRes.error){
+                error_main= true
+                error_message_main = jsonRes.error
+                this.setState({
+                    error:{error_user_name,error_main,error_password},
+                    error_message:{error_message_user_name,error_message_password,error_message_main}
+                })
+            } else {
+                //setup user for redirect
+                this.setState({user:{...jsonRes[0]}})
+                //login server side
+                return fetch(`${base_url}auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({user_name:user_name_encrypt,password:password_encrypt}),
+                }).then(res =>{return res.json()}).then(jsonRes=>{
+                    //LOGIN WITH YOUR CREATED USER
+                    if(!jsonRes.error){
+                        TokenService.saveAuthToken(jsonRes.authToken)
+                        this.context.toggleLogin(true)
+                        this.setState({success:true})
+                    }else {
+                        error_main= true
+                        error_message_main = jsonRes.error
+                        this.setState({
+                            error:{error_user_name,error_main,error_password},
+                            error_message:{error_message_user_name,error_message_password,error_message_main}
+                        })
+                    }
+                })
             }
-        )
+        })
     }
     handlePasswordRepeatChange= (event)=>{
         const password_repeat = event.target.value
@@ -116,6 +136,7 @@ class RegisterPage extends Component{
         }
 
         this.setState({
+            user:{},
             user_name,
             error:{
                 error_user_name,
@@ -152,7 +173,7 @@ class RegisterPage extends Component{
     }
     render(){
         if (this.state.success){
-            return <Redirect to={`/`}/>
+            return <Redirect to={`/teams/user/${this.state.user.id}/`}/>
         }
         return (
             <div>

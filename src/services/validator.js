@@ -15,7 +15,7 @@ const ValidateHelper = {
         if(!patAlpha.test(name)){
             return [false, "Should contain alphabetical characters"]
         }
-        const patBadCharacters = /[^a-zA-Z _. 0-9]/
+        const patBadCharacters = /[^a-zA-Z_. 0-9']/
         if(patBadCharacters.test(name)){
             return [false,"Should only contain alphanumeric, underscores '_', periods'.' spaces ' ' ."]
         }
