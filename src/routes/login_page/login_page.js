@@ -5,7 +5,13 @@ import TrafusContext from '../../contexts/trafus_context'
 import ButtonTemplate from '../../components/button/button'
 import config from '../../config'
 import TokenService from '../../services/token-services'
-
+/**
+ * verifyJwt(token){
+        return jwt.verify(token,config.JWT_SECRET,{
+            algorithm:'HS256'
+        })
+    }
+ */
 class LoginPage extends Component{
     static contextType=TrafusContext
 
@@ -35,9 +41,9 @@ class LoginPage extends Component{
             .then(res =>{return res.json()}
         ).then(jsonRes=>{
             if(!jsonRes.error){
-                TokenService.saveAuthToken(jsonRes.authToken)
+                TokenService.saveAuthToken(jsonRes.authToken,jsonRes.payload)
                 this.context.toggleLogin(true)
-                this.setState({success:true})
+                this.setState({success:true, user_details:{...jsonRes.payload}})
             }else {
                 error_main = true
                 error_message_main=jsonRes.error
@@ -100,6 +106,7 @@ class LoginPage extends Component{
         })
     }
     state = {
+        user_details:"",
         user_name:"",
         password:"",
         error:{
@@ -116,7 +123,7 @@ class LoginPage extends Component{
     }
     render(){
         if (this.state.success){
-            return <Redirect to={`/${1}/${1}/`}/>
+            return <Redirect to={`/${this.state.user_details.user_id}/${this.state.user_details.team_id}/`}/>
         }
         return (
             <div>

@@ -46,7 +46,6 @@ class CreateTeam extends Component{
                         headers:{'content-type': 'application/json'},
                         body: JSON.stringify({id:userId , team_id:team_id})
                     }).then(res=>res.json()).then(user=>{
-                        console.log(user)
                         this.props.handleCreateTeam(user.team_id)
                     })
                 }

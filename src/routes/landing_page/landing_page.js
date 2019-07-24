@@ -17,7 +17,7 @@ class LandingPage extends Component{
                 },
                 body: JSON.stringify({user_name:window.btoa("dunder"),password:window.btoa("hello_dunder")}),
         }).then(res=>res.json()).then(jsonRes=>{
-            TokenService.saveAuthToken(jsonRes.authToken)
+            TokenService.saveAuthToken(jsonRes.authToken,jsonRes.payload)
             this.context.toggleLogin(true)
         })
     }
@@ -26,8 +26,8 @@ class LandingPage extends Component{
         this.handleLogin()
     }
     render(){
-        if(this.context.loggedIn){
-            return <Redirect to="/1/1/"/>
+        if(window.localStorage.getItem("authToken")){
+            return <Redirect to={`/${window.localStorage.getItem("user_id")}/${window.localStorage.getItem("team_id")}/`}/>
         }
         return (
             <div>

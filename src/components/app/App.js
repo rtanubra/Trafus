@@ -36,6 +36,12 @@ class App extends Component{
             this.setState({loggedIn:false})
         }
     }
+    fetchTeams=()=>{
+        const url = `${config.API_ENDPOINT}teams/`
+        fetch(url).then(res=>res.json()).then(jsonRes=>{
+            this.setState({trafus_teams:[...jsonRes]})
+        })
+    }
     fetchCategories=(team_id)=>{
         const base_url = config.API_ENDPOINT
         const team = team_id 
@@ -70,15 +76,32 @@ class App extends Component{
             })
         })
     }
+    updateTeamContext(teamId){
+        const url = `${config.API_ENDPOINT}teams/`
+        fetch(url).then(res=>res.json()).then(jsonRes=>{
+            const teams= [...jsonRes]
+            const team = teams.find(t=>{
+                return parseInt(t.id) === parseInt(teamId)
+            })
+            return team
+        })
+        /*
+        const teams = [...this.context.trafus_teams]
+        const team = teams.find(t=>{
+            return parseInt(t.id) === parseInt(teamId)
+        })
+        return team
+        */
+    }
     componentDidMount(){
-        const team = 1 
+        const team = 1
         this.fetchCategories(team)
+        this.fetchTeams()
     }
 
-    addCategoryApi = (category)=>{
+    addCategoryApi = (category,teamId)=>{
         const base_url =config.API_ENDPOINT
-        const team = 1
-        return fetch(`${base_url}categories/${team}/`, {
+        return fetch(`${base_url}categories/${teamId}/`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -90,14 +113,14 @@ class App extends Component{
                    return res.json().then(jsonRes=>{}) 
                 }
                 else{
-                    this.fetchCategories(1)
+                    this.fetchCategories(teamId)
                     return res.json()
                 }
             }
         )
     }
 
-    editCategoryApi = (category)=>{
+    editCategoryApi = (category,teamId)=>{
         const base_url =config.API_ENDPOINT
         const url = `${base_url}categories/category/${category.id}/`
         fetch(url,{
@@ -105,7 +128,7 @@ class App extends Component{
             headers:{'content-type':'application/json'},
             body:JSON.stringify(category)
         }).then(()=>{
-            this.fetchCategories(1)
+            this.fetchCategories(teamId)
         })
     }
 
@@ -138,7 +161,7 @@ class App extends Component{
         })
     }
 
-    deleteCategoryApi = (category)=>{
+    deleteCategoryApi = (category,teamId)=>{
         const base_url =config.API_ENDPOINT
         const url = `${base_url}categories/category/${category.id}/`
         fetch(url,{
@@ -147,7 +170,7 @@ class App extends Component{
             if(!res.ok){
                 return res.json().then(e=> Promise.reject(e))
             }
-            this.fetchCategories(1)
+            this.fetchCategories(teamId)
         })
     }
 
@@ -190,6 +213,8 @@ class App extends Component{
         contextValue.deleteCategory=this.deleteCategoryApi
         contextValue.deleteExpense=this.deleteExpenseApi
         contextValue.toggleLogin = this.toggleLogin
+        contextValue.fetchTeams = this.fetchTeams
+        contextValue.updateTeamContext =this.updateTeamContext
         return (
           <TrafusContext.Provider value={contextValue}>
             <NavBar/>

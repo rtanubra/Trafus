@@ -82,7 +82,7 @@ class AddCategoryForm extends Component{
                 budget:parseFloat(this.state.budget),
                 team_id: parseInt(teamId)
             }
-            this.context.addCategory(category)
+            this.context.addCategory(category,teamId)
             this.setState({
                 name:"",
                 budget:"",

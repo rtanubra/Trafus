@@ -12,6 +12,7 @@ const TrafusContext = React.createContext({
     editCategory:()=>{},
     deleteCategory:()=>{},
     deleteExpense:()=>{},
+    team:"",
 })
 
 export default TrafusContext

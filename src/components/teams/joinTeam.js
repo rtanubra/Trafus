@@ -1,6 +1,4 @@
 import React, {Component} from 'react'
-import TeamButton from './teamRadioButton'
-import ButtonTemplate from '../button/button'
 import config from '../../config'
 
 class JoinTeam extends Component{

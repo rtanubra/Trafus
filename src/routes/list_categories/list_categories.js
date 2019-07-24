@@ -9,6 +9,7 @@ import {Link, Redirect} from 'react-router-dom'
 class ListCategories extends Component {
     static contextType = TrafusContext
 
+
     render(){
         const {userId, teamId} = this.props.match.params
         const teamCategories = this.context.trafus_categories.filter(category=>{
@@ -22,9 +23,10 @@ class ListCategories extends Component {
         if (!window.localStorage.getItem('authToken')){
             return <Redirect to={""}/>
         }
+
         return (
             <div>
-                <h2>{`Current Budget for ${team.name}`}</h2>
+                <h2>{`Current Budget for ${team?team.name:"team"}`}</h2>
                 <Link to={`/${userId}/${teamId}/add_category`} >
                     <button className="css_add_category">Add a Category</button>
                 </Link>

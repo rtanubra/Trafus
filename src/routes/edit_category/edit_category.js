@@ -52,14 +52,6 @@ class EditCategory extends Component{
             error_name=true
             error_message_name = `Category name ${valid[1]}`
         }
-        if(name.length < 3){
-            error_name = true
-            error_message_name = "Category Name Should be longer than 3 characters"
-        } 
-        if(name.startsWith(" ") || name.endsWith(" ")){
-            error_name=true
-            error_message_name = "Category Name should not begin or end with a ' ' space"
-        } 
 
         this.setState({
             name,
@@ -95,12 +87,13 @@ class EditCategory extends Component{
         })
     }
     handleSubmit=(e)=>{
+        const {teamId} = this.props.match.params
         e.preventDefault()
         this.context.editCategory({
             name:this.state.name,
             budget: parseFloat(this.state.budget),
             id: this.props.match.params.categoryId
-        })
+        },teamId)
         
         this.setState({
                 success:true
@@ -108,12 +101,13 @@ class EditCategory extends Component{
         
     }
     handleDelete = ()=>{
+        const {teamId} = this.props.match.params
         const category = {
             name:this.state.name,
             budget:this.state.budget,
             id:this.props.match.params.categoryId
         }
-        this.context.deleteCategory(category)
+        this.context.deleteCategory(category,teamId)
         this.setState({
             success:true
         })
@@ -147,7 +141,7 @@ class EditCategory extends Component{
                         </Link>
                     </fieldset>
                 </form>
-                <ButtonTemplate onClick={this.handleDelete} className="css_back_button" label={`Delete ${this.state.name}`} />
+                <ButtonTemplate onClick={this.handleDelete} className="css_back_button" label={`Delete Category`} />
             </div>
         )
     }

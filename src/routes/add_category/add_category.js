@@ -16,6 +16,9 @@ class AddCategory extends Component {
         if (!window.localStorage.getItem('authToken')){
             return <Redirect to=""/>
         }
+        if (!team){
+            return <div></div>
+        }
         return (
             <div>
                 <h2>{team.name} Categories</h2>

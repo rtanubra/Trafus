@@ -1,8 +1,5 @@
 import React, {Component} from 'react'
 import {Redirect} from 'react-router-dom'
-import ErrorMessage from '../../components/error/ErrorMessage'
-import TrafusContext from '../../contexts/trafus_context'
-import ButtonTemplate from '../../components/button/button'
 import config from '../../config'
 
 
@@ -15,7 +12,6 @@ class TeamLanding extends Component{
     }
     handleJoinTeam=(team_id)=>{
         this.setState({team_id,success:true})
-        console.log(team_id)
     }
     state={
         teams:[],

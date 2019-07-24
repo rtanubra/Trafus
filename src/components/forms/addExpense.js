@@ -93,7 +93,7 @@ class AddExpenseForm extends Component{
         })
     }
     render(){
-        const {userId,teamId, categoryId, category} = this.props
+        const {userId,teamId, categoryId} = this.props
         if (this.state.success){
             return <Redirect to ={`/${userId}/${teamId}/${categoryId}`} />
         }

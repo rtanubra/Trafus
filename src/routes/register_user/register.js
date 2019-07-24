@@ -57,8 +57,9 @@ class RegisterPage extends Component{
                 }).then(res =>{return res.json()}).then(jsonRes=>{
                     //LOGIN WITH YOUR CREATED USER
                     if(!jsonRes.error){
-                        TokenService.saveAuthToken(jsonRes.authToken)
+                        TokenService.saveAuthToken(jsonRes.authToken,jsonRes.payload)
                         this.context.toggleLogin(true)
+                        this.context.fetchTeams()
                         this.setState({success:true})
                     }else {
                         error_main= true
