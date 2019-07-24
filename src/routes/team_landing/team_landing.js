@@ -8,9 +8,11 @@ import JoinTeam from '../../components/teams/joinTeam'
 
 class TeamLanding extends Component{
     handleCreateTeam = (team_id)=>{
+        window.localStorage.setItem('team_id',team_id)
         this.setState({team_id,success:true})
     }
     handleJoinTeam=(team_id)=>{
+        window.localStorage.setItem('team_id',team_id)
         this.setState({team_id,success:true})
     }
     state={
