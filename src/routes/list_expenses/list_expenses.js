@@ -48,7 +48,7 @@ class ListExpenses extends Component{
         if (category){  
             return (
                 <div>
-                    <h2>{`${team.name}`}</h2> 
+                    {team?<h2>{`${team.name}`}</h2>:""}
                     <h3>{`${category.name}`}</h3>
                     <CategorySummaryTable budget ={category.budget} current_expense={current_expense} />
                     <ul>{expenseListDisplay}</ul>

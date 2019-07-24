@@ -6,6 +6,7 @@ import TrafusContext from '../../contexts/trafus_context'
 import ButtonTemplate from "../../components/button/button"
 import ErrorMessage from '../../components/error/ErrorMessage'
 import ValidateHelper from '../../services/validator'
+import WarningDelete from '../../components/warning/warning'
 
 class EditExpense extends Component{
     static contextType = TrafusContext
@@ -24,6 +25,7 @@ class EditExpense extends Component{
     }
 
     state = {
+        delete:false,
         name:"",
         expense:"",
         error:{
@@ -36,7 +38,12 @@ class EditExpense extends Component{
         },
         success:false
     }
-
+    toggleDeleteOn=()=>{
+        this.setState({delete:true})
+    }
+    toggleDeleteOff=()=>{
+        this.setState({delete:false})
+    }
     handleSubmit= (event)=>{
         event.preventDefault()
         if (this.state.error.error_name || this.state.error.error_expense){
@@ -147,7 +154,8 @@ class EditExpense extends Component{
                         <Link to={`/${userId}/${teamId}/${categoryId}`} ><ButtonTemplate className="css_back_button" label={`Back to Expenses`}/></Link>
                     </fieldset>
                 </form>
-                <ButtonTemplate onClick={this.handleDelete} className="css_back_button" label={`Delete - ${this.state.name}`} />
+                {this.state.delete?<WarningDelete backFunction={this.toggleDeleteOff} function={this.handleDelete} name={this.state.name} /> : ""}
+                <ButtonTemplate onClick={this.toggleDeleteOn} className="css_back_button" label={`Delete Expense`} />
             </div>
         )
     }

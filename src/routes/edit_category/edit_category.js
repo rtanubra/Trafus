@@ -3,12 +3,14 @@ import TrafusContext from '../../contexts/trafus_context'
 import {Redirect,Link} from 'react-router-dom'
 
 import ButtonTemplate from '../../components/button/button'
+import WarningDelete from '../../components/warning/warning'
 import ErrorMessage from '../../components/error/ErrorMessage'
 import ValidateHelper from '../../services/validator'
 
 class EditCategory extends Component{
     static contextType = TrafusContext
     state = {
+        delete:false,
         name:"",
         budget:"",
         error:{
@@ -100,6 +102,12 @@ class EditCategory extends Component{
         })
         
     }
+    toggleDeleteOn=()=>{
+        this.setState({delete:true})
+    }
+    toggleDeleteOff=()=>{
+        this.setState({delete:false})
+    }
     handleDelete = ()=>{
         const {teamId} = this.props.match.params
         const category = {
@@ -141,7 +149,8 @@ class EditCategory extends Component{
                         </Link>
                     </fieldset>
                 </form>
-                <ButtonTemplate onClick={this.handleDelete} className="css_back_button" label={`Delete Category`} />
+                {this.state.delete?<WarningDelete backFunction={this.toggleDeleteOff} function={this.handleDelete} name={this.state.name} /> : ""}
+                <ButtonTemplate onClick={this.toggleDeleteOn} className="css_back_button" label={`Delete Category`} />
             </div>
         )
     }
