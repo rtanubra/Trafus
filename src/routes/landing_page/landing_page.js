@@ -26,7 +26,7 @@ class LandingPage extends Component{
         this.handleLogin()
     }
     render(){
-        if(window.localStorage.getItem("authToken")){
+        if(window.localStorage.getItem('user_id') && window.localStorage.getItem('team_id')){
             return <Redirect to={`/${window.localStorage.getItem("user_id")}/${window.localStorage.getItem("team_id")}/`}/>
         }
         return (

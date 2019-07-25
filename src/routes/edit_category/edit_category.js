@@ -122,7 +122,7 @@ class EditCategory extends Component{
     }
     render(){
         const {userId, teamId} = this.props.match.params
-        if (!window.localStorage.getItem('authToken')){
+        if (!window.localStorage.getItem('authToken')||!window.localStorage.getItem('user_id')||!window.localStorage.getItem('team_id')){
             return <Redirect to=""/>
         }
         if (this.state.success){

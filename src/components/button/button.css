@@ -33,7 +33,10 @@ button.css_edit_category:hover{
     color:white;
     background-color: grey;
 }
-
+button.small{
+    color:grey;
+    width:40px;
+}
 button.css_expense_detail{
     color:green;
 }

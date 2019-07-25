@@ -11,7 +11,7 @@ class NavBar extends Component{
         this.context.toggleLogin(false)
     }
     render(){
-        const loggedIn = window.localStorage.getItem('authToken')
+        const loggedIn = window.localStorage.getItem('authToken') && window.localStorage.getItem('user_id') && window.localStorage.getItem('team_id')
         return <NavAuth loggedin={loggedIn} />
         }
 }
