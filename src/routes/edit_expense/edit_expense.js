@@ -67,7 +67,7 @@ class EditExpense extends Component{
             id:this.props.match.params.expenseId
         }
         this.context.deleteExpense(expense)
-        console.log(expense)
+
         this.setState({
             success:true
         })

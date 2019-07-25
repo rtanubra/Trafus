@@ -35,7 +35,12 @@ class RegisterPage extends Component{
                 },
                 body: JSON.stringify({user_name:user_name_encrypt,password:password_encrypt}),
             })
-            .then(res =>res.json()
+            .then(
+                res =>{
+                    if (!res.ok){
+                        throw new Error(res.statusText)
+                    }
+                    res.json()}
         ).then(jsonRes=>{
             if (jsonRes.error){
                 error_main= true
@@ -71,7 +76,7 @@ class RegisterPage extends Component{
                     }
                 })
             }
-        })
+        }).catch(err=>{console.log(err)})
     }
     handlePasswordRepeatChange= (event)=>{
         const password_repeat = event.target.value
