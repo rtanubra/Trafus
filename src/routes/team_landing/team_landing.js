@@ -43,6 +43,7 @@ class TeamLanding extends Component{
             })
     }
     render(){
+        console.log(process.env.NODE_ENV)
         const user = this.state.user? this.state.user.user_name : ""
         const {userId} =this.props.match.params
         if (this.state.success){
