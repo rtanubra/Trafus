@@ -26,8 +26,6 @@ class LandingPage extends Component{
         this.handleLogin()
     }
     render(){
-        console.log(config.API_ENDPOINT)
-        console.log(process.env.NODE_ENV)
         if(window.localStorage.getItem('user_id') && window.localStorage.getItem('team_id')){
             return <Redirect to={`/${window.localStorage.getItem("user_id")}/${window.localStorage.getItem("team_id")}/`}/>
         }
