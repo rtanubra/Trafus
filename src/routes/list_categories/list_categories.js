@@ -9,6 +9,9 @@ import {Link, Redirect} from 'react-router-dom'
 class ListCategories extends Component {
     static contextType = TrafusContext
 
+    componentWillMount(){
+        this.context.fetchTeams()
+    }
 
     render(){
         const {userId, teamId} = this.props.match.params
