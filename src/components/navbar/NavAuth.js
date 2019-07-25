@@ -15,6 +15,7 @@ class NavAuth extends Component{
             return(
                 <div className="topnav">
                     <Link to={`/`} ><h1>Trafus</h1></Link>
+                    
                     <div className='css-auth'>
                         <Link to={'/login'}>Login</Link>
                         <Link to={'/register'}>Register</Link>
@@ -28,6 +29,7 @@ class NavAuth extends Component{
                 <div className="topnav">
                     <Link to={`/`} ><h1>Trafus</h1></Link>
                     <div className='css-auth'>
+                        <Link to={`/teams/user/${window.localStorage.getItem('user_id')}/`} >Switch Team</Link>
                         <Link  onClick={()=>{this.handleLogout()}} className="" to={''} >Logout</Link>
                     </div>
                 </div>
