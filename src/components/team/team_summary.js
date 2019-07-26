@@ -2,6 +2,7 @@ import './team_summary.css'
 import React, {Component} from 'react'
 
 import TrafusContext from '../../contexts/trafus_context'
+import NumberService from '../../services/number-services'
 
 class TeamSummary extends Component{
     static contextType = TrafusContext
@@ -28,7 +29,9 @@ class TeamSummary extends Component{
         this.props.categories.forEach(cat=>{
             totalBudget += cat.budget
         })
-        const totalExpense = this.calculateExpense(this.props.categories,this.context.trafus_expenses)
+        totalBudget = NumberService.roundMe(totalBudget)
+        const totalExpense = NumberService.roundMe(this.calculateExpense(this.props.categories,this.context.trafus_expenses))
+        const remaining = NumberService.roundMe(totalBudget-totalExpense)
         return (
             <div>
                 <table>
@@ -41,9 +44,9 @@ class TeamSummary extends Component{
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{this.roundMe(totalBudget)}</td>
-                            <td>{this.roundMe(totalExpense)}</td>
-                            <td>{this.roundMe(totalBudget-totalExpense)}</td>
+                            <td>{NumberService.dollarFormat(totalBudget)}</td>
+                            <td>{NumberService.dollarFormat(totalExpense)}</td>
+                            <td>{NumberService.dollarFormat(remaining)}</td>
                         </tr>
                     </tbody>
                 </table>
