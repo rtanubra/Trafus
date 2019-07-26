@@ -6,10 +6,12 @@ import ButtonTemplate from '../../components/button/button'
 import WarningDelete from '../../components/warning/warning'
 import ErrorMessage from '../../components/error/ErrorMessage'
 import ValidateHelper from '../../services/validator'
+import ListExpensesComp from '../../components/expense/list-expenses'
 
 class EditCategory extends Component{
     static contextType = TrafusContext
     state = {
+        edit:false,
         delete:false,
         name:"",
         budget:"",
@@ -41,6 +43,13 @@ class EditCategory extends Component{
             })
         }
         
+    }
+    toggleEdit=()=>{
+        if (this.state.edit){
+            this.setState({edit:false})
+        }else {
+            this.setState({edit:true})
+        }
     }
     handleNameChange = (event)=>{
         const name = event.target.value
@@ -121,17 +130,27 @@ class EditCategory extends Component{
         })
     }
     render(){
-        const {userId, teamId} = this.props.match.params
+        const {userId, teamId, categoryId} = this.props.match.params
         if (!window.localStorage.getItem('authToken')||!window.localStorage.getItem('user_id')||!window.localStorage.getItem('team_id')){
             return <Redirect to=""/>
         }
         if (this.state.success){
             return <Redirect to={`/${userId}/${teamId}/`} />
         }
- 
+        if (!this.state.edit){
+            return (
+                <div>
+                <ListExpensesComp categoryId={categoryId} userId={userId} teamId={teamId} />
+                <button className="css_edit_category" onClick={this.toggleEdit} >Edit Category</button>
+                {this.state.delete?<WarningDelete backFunction={this.toggleDeleteOff} function={this.handleDelete} name={this.state.name} /> : ""}
+                <ButtonTemplate onClick={this.toggleDeleteOn} className="css_back_button" label={`Delete Category`} />
+            </div>
+            )
+        }
         return (
             <div>
                 <h2>Edit - {this.state.name}</h2>
+                <button className="css_edit_category" onClick={this.toggleEdit} >Detail View</button>
                 <form onSubmit={this.handleSubmit}>
                     <fieldset>
                         <legend>Edit Category</legend>
@@ -143,7 +162,7 @@ class EditCategory extends Component{
                         <label htmlFor="js_category_budget" >Expected Budget : </label>
                         <input value={this.state.budget} onChange={this.handleBudgetChange} required type="number" min="0" step="0.01" max="100000" name="js_category_budget" id="js_category_budget"/>
                         <br/>
-                        <ButtonTemplate className="css_submit_button" type="submit" label="Submit" />
+                        <ButtonTemplate className="css_submit_button" type="submit" label="Submit Changes" />
                         <Link to={`/${userId}/${teamId}/`} >
                             <ButtonTemplate className="css_back_button" label="Go Back"/>
                         </Link>

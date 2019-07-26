@@ -95,7 +95,7 @@ class AddExpenseForm extends Component{
     render(){
         const {userId,teamId, categoryId} = this.props
         if (this.state.success){
-            return <Redirect to ={`/${userId}/${teamId}/${categoryId}`} />
+            return <Redirect to ={`/${userId}/${teamId}/${categoryId}/edit`} />
         }
         return(<form onSubmit={this.handleSubmit}>
                     <fieldset>
@@ -109,7 +109,7 @@ class AddExpenseForm extends Component{
                         <input required type="number" min="0" max="100000" step="0.01" onChange={this.handleExpenseChange} name="js_expense_amount" id="js_expense_amount" value={this.state.expense} />
                         <br/>
                         <ButtonTemplate type="submit" className="css_submit_button" label="Submit"  />
-                        <Link to={`/${userId}/${teamId}/${categoryId}`} ><ButtonTemplate className="css_back_button" label={`Back to Expenses`}/></Link>
+                        <Link to={`/${userId}/${teamId}/${categoryId}/edit`} ><ButtonTemplate className="css_back_button" label={`Back to Expenses`}/></Link>
                     </fieldset>
                 </form>)
     }
