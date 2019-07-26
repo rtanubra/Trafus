@@ -1,13 +1,12 @@
 import React, {Component} from 'react'
+import NumberService from '../../services/number-services'
 
 class CategorySummaryTable extends Component {
-    roundMe = (number)=>{
-        return Math.round(number * 100)/100
-    }
+
     render(){
-        const budget = this.roundMe(this.props.budget)
-        const expense = this.roundMe(this.props.current_expense)
-        const remaining = this.roundMe(budget-expense)
+        const budget = NumberService.roundMe(this.props.budget)
+        const expense = NumberService.roundMe(this.props.current_expense)
+        const remaining = NumberService.roundMe(budget-expense)
         return(
             <table>
                 <thead>
@@ -19,9 +18,9 @@ class CategorySummaryTable extends Component {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{budget}</td>
-                        <td>{expense}</td>
-                        <td>{remaining}</td>
+                        <td>{NumberService.dollarFormat(budget)}</td>
+                        <td>{NumberService.dollarFormat(expense)}</td>
+                        <td>{NumberService.dollarFormat(remaining)}</td>
                     </tr>
                 </tbody>
             </table>
