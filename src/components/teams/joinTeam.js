@@ -7,14 +7,21 @@ class JoinTeam extends Component{
         const base_url =config.API_ENDPOINT
         const team_id = parseInt(this.state.team)
         const userId = parseInt(this.props.userId)
-
-        return fetch(`${base_url}users`,{
-                    method:"PATCH",
-                    headers:{'content-type': 'application/json'},
-                    body: JSON.stringify({id:userId , team_id:team_id})
-        }).then(()=>{
-            this.props.handleJoinTeam(team_id)
+        const team = this.props.teams.find(t=>{
+            return t.id === team_id
         })
+        if (team.password){
+
+        }
+        else {
+            return fetch(`${base_url}users`,{
+                        method:"PATCH",
+                        headers:{'content-type': 'application/json'},
+                        body: JSON.stringify({id:userId , team_id:team_id})
+            }).then(()=>{
+                this.props.handleJoinTeam(team_id)
+            })
+        }
     }
     onTeamChange=(event)=>{
         this.setState({
@@ -28,7 +35,11 @@ class JoinTeam extends Component{
     }
     createButton(team){
         const key = `${team.name}_${team.id}`
-        return (<div key={`div_${key}`}><input className={'css-team-radio'} onChange={this.onTeamChange} checked={parseInt(this.state.team)=== parseInt(team.id)}  type="radio" name="team_select" value={team.id} key={key}/>{team.name}</div>)
+        return (
+        <div key={`div_${key}`}>
+            <input className={'css-team-radio'} onChange={this.onTeamChange} checked={parseInt(this.state.team)=== parseInt(team.id)}  type="radio" name="team_select" value={team.id} key={key}/>
+            {`${team.name} - ${team.password? 'Private (password required)' :"Public "}`}
+        </div>)
     }
     render(){
         
