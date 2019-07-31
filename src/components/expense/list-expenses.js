@@ -47,7 +47,7 @@ class ListExpensesComp extends Component{
         if (category){  
             return (
                 <div>
-                    <h3>{`${category.name} Expense Details`}</h3>
+                    
                     <Link to={`/${userId}/${teamId}/${categoryId}/add_expense`}>
                         <ButtonTemplate className="css_add_expense" label="Add an Expense"/>
                     </Link>

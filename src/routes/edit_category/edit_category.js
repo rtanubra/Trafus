@@ -131,6 +131,9 @@ class EditCategory extends Component{
     }
     render(){
         const {userId, teamId, categoryId} = this.props.match.params
+        const category = this.context.trafus_categories.find(category=>{
+            return category.id === parseInt(categoryId)
+        })
         if (!window.localStorage.getItem('authToken')||!window.localStorage.getItem('user_id')||!window.localStorage.getItem('team_id')){
             return <Redirect to=""/>
         }
@@ -140,8 +143,10 @@ class EditCategory extends Component{
         if (!this.state.edit){
             return (
                 <div>
+                {category?<h3>{`${category.name} Expense Details`}</h3>:""}
+                <button className="css_edit_category" onClick={this.toggleEdit} >Edit View</button>
                 <ListExpensesComp categoryId={categoryId} userId={userId} teamId={teamId} />
-                <button className="css_edit_category" onClick={this.toggleEdit} >Edit Category</button>
+                
                 {this.state.delete?<WarningDelete backFunction={this.toggleDeleteOff} function={this.handleDelete} name={this.state.name} /> : ""}
                 <ButtonTemplate onClick={this.toggleDeleteOn} className="css_back_button" label={`Delete Category`} />
             </div>
