@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Redirect} from 'react-router-dom'
 import config from '../../config'
-
+import {Link} from 'react-router-dom'
 
 import CreateTeam from '../../components/teams/createTeam'
 import JoinTeam from '../../components/teams/joinTeam'
@@ -52,6 +52,7 @@ class TeamLanding extends Component{
         <div>
             <h1>Welcome {user}</h1>
             <h2>Team Options</h2>
+            <Link to={`/`} ><button className="css_back_button" >Stay with my team</button></Link>
             <h3>Join An Existing Team</h3>
                 <JoinTeam handleJoinTeam={this.handleJoinTeam} userId={parseInt(userId)} teams={this.state.teams}/>
             <h3>Create New Team</h3>

@@ -122,7 +122,7 @@ class CreateTeam extends Component{
         if (!this.state.private){
             return (
             <div>
-                <button onClick={this.togglePrivate}>Create a Private Team</button>
+                <button className="css_edit_category" onClick={this.togglePrivate}>Create a Private Team</button>
                 <form onSubmit={this.handleSubmit} >
                 <fieldset>
                     {this.state.name_error?<ErrorMessage message={this.state.name_error_message} />:"" }
@@ -138,7 +138,7 @@ class CreateTeam extends Component{
         else {
         return (
             <div>
-                <button onClick={this.togglePrivate}>Create a Public Team</button>
+                <button className="css_edit_category" onClick={this.togglePrivate}>Create a Public Team</button>
                 <form onSubmit={this.handleSubmit} >
                 <fieldset>
                     <legend>Create a new team</legend>

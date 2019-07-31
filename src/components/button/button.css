@@ -45,7 +45,7 @@ button.css_add_expense:hover{
 }
 button.css_edit_category{
     color:darkorchid;
-    border:1px solid white;
+    border:3px dashed black;
 }
 button.css_edit_category:hover{
     color:white;

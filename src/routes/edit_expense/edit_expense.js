@@ -155,7 +155,7 @@ class EditExpense extends Component{
                     </fieldset>
                 </form>
                 {this.state.delete?<WarningDelete backFunction={this.toggleDeleteOff} function={this.handleDelete} name={this.state.name} /> : ""}
-                <ButtonTemplate onClick={this.toggleDeleteOn} className="css_back_button" label={`Delete Expense`} />
+                <ButtonTemplate onClick={this.toggleDeleteOn} className="css_delete_button" label={`Delete Expense`} />
             </div>
         )
     }

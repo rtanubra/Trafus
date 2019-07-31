@@ -44,7 +44,7 @@ class JoinTeam extends Component{
         return (
         <div key={`div_${key}`}>
             <input className={'css-team-radio'} onChange={this.onTeamChange} checked={parseInt(this.state.team)=== parseInt(team.id)}  type="radio" name="team_select" value={team.id} key={key}/>
-            {`${team.name} - ${team.password? 'Private (password required)' :"Public "}`}
+            {`${team.name} - ${team.password? 'Private' :"Public"}`}
         </div>)
     }
     render(){
