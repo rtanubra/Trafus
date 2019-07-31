@@ -78,7 +78,7 @@ class CreateTeam extends Component{
                 headers: {
                     'content-type': 'application/json'
                 },
-                body: JSON.stringify({team}),
+                body: JSON.stringify(team),
             })
             .then(res =>{
                 return res.json()
@@ -92,14 +92,15 @@ class CreateTeam extends Component{
                 })
             }
             else{
+
                     const team_id = parseInt(jsonRes.id)
                     const userId = parseInt(this.props.userId)
                     return fetch(`${base_url}users`,{
                         method:"PATCH",
                         headers:{'content-type': 'application/json'},
-                        body: JSON.stringify({id:userId , team_id:team_id})
-                    }).then(res=>res.json()).then(user=>{
-                        this.props.handleCreateTeam(user.team_id)
+                        body: JSON.stringify({id:userId , team_id:team_id,password:this.state.password})
+                    }).then(res=>res.json()).then(jsonRes=>{
+                        this.props.handleCreateTeam(team_id)
                     })
                 }
         })
