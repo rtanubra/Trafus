@@ -1,7 +1,12 @@
 import React, {Component} from 'react'
 import config from '../../config'
+import JoinPrivateTeam from './joinPrivateTeam'
 
 class JoinTeam extends Component{
+    toggleJoinPrivate=(e)=>{
+        e.preventDefault()
+        this.setState({join_private:false})
+    }
     handleSubmit=(event)=>{
         event.preventDefault()
         const base_url =config.API_ENDPOINT
@@ -11,7 +16,7 @@ class JoinTeam extends Component{
             return t.id === team_id
         })
         if (team.password){
-
+            this.setState({join_private:true})
         }
         else {
             return fetch(`${base_url}users`,{
@@ -30,6 +35,7 @@ class JoinTeam extends Component{
 
     }
     state = {
+        join_private:false,
         team:1,
 
     }
@@ -42,10 +48,16 @@ class JoinTeam extends Component{
         </div>)
     }
     render(){
-        
+        const team_id = parseInt(this.state.team)
+        const team = this.props.teams.find(t=>{
+            return t.id === team_id
+        })
         const teamsButtons = this.props.teams.length >0 ? this.props.teams.map(team=>{
             return  this.createButton(team) }) : ""
-
+        
+        if (this.state.join_private){
+            return <JoinPrivateTeam handleJoinTeam={this.props.handleJoinTeam} toggleJoinPrivate={this.toggleJoinPrivate} userId={this.props.userId} team={team} name={team.name}/>
+        }
         return (
             <form onSubmit={this.handleSubmit}>
                 <fieldset>
