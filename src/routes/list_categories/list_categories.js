@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import './list_categories.css'
+import '../../components/button/button.css'
 import TrafusContext from "../../contexts/trafus_context"
 import Category from "../../components/category/category"
 import TeamSummary from '../../components/team/team_summary'

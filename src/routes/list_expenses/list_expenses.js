@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import TrafusContext from "../../contexts/trafus_context"
 import CategorySummaryTable from '../../components/category/category_summary'
 import Expense from "../../components/expense/expense"
-import './list_expenses.css'
+import '../../components/button/button.css'
 import {Link,Redirect} from 'react-router-dom'
 import ButtonTemplate from "../../components/button/button"
 class ListExpenses extends Component{
@@ -54,7 +54,7 @@ class ListExpenses extends Component{
                         <ButtonTemplate className="css_add_expense" label="Add an Expense"/>
                     </Link>
                     <Link to={`/${userId}/${teamId}`}>
-                        <button className="css_go_back">Back to Categories</button>
+                        <button className="css_back_button">Back to Categories</button>
                     </Link>
                     <CategorySummaryTable budget ={category.budget} current_expense={current_expense} />
                     <ul>{expenseListDisplay}</ul>

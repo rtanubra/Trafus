@@ -1,16 +1,26 @@
 button{
-    height:50px;
+    height:30px;
     margin:10px;
     width:150px;
     border-radius:12px;
     font-weight: bold;
 }
 .css_back_button{
-    color:red;
+    color:SteelBlue
 }
 .css_back_button:hover{
     color:white;
+    background-color:SteelBlue;
+}
+.css_delete_button{
+    color:white;
     background-color:red;
+
+}
+.css_delete_button:hover{
+    color:red;
+    background-color:white;
+
 }
 .css_submit_button{
     color:green
@@ -18,6 +28,13 @@ button{
 .css_submit_button:hover{
     color:white;
     background-color:green
+}
+button.css_add_category{
+    color:purple;
+}
+button.css_add_category:hover{
+    color:white;
+    background-color:darkmagenta 
 }
 button.css_add_expense{
     color:blue
@@ -27,14 +44,14 @@ button.css_add_expense:hover{
     background-color: blue;
 }
 button.css_edit_category{
-    color:grey;
+    color:darkorchid;
+    border:1px solid white;
 }
 button.css_edit_category:hover{
     color:white;
-    background-color: grey;
+    background-color: darkorchid;
 }
 button.small{
-    color:grey;
     width:40px;
 }
 button.css_expense_detail{

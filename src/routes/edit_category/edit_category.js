@@ -143,12 +143,12 @@ class EditCategory extends Component{
         if (!this.state.edit){
             return (
                 <div>
-                {category?<h3>{`${category.name} Expense Details`}</h3>:""}
+                {category?<h2>{`${category.name} Expense Details`}</h2>:""}
                 <button className="css_edit_category" onClick={this.toggleEdit} >Edit View</button>
                 <ListExpensesComp categoryId={categoryId} userId={userId} teamId={teamId} />
                 
                 {this.state.delete?<WarningDelete backFunction={this.toggleDeleteOff} function={this.handleDelete} name={this.state.name} /> : ""}
-                <ButtonTemplate onClick={this.toggleDeleteOn} className="css_back_button" label={`Delete Category`} />
+                <ButtonTemplate onClick={this.toggleDeleteOn} className="css_delete_button" label={`Delete Category`} />
             </div>
             )
         }
@@ -174,7 +174,7 @@ class EditCategory extends Component{
                     </fieldset>
                 </form>
                 {this.state.delete?<WarningDelete backFunction={this.toggleDeleteOff} function={this.handleDelete} name={this.state.name} /> : ""}
-                <ButtonTemplate onClick={this.toggleDeleteOn} className="css_back_button" label={`Delete Category`} />
+                <ButtonTemplate onClick={this.toggleDeleteOn} className="css_delete_button" label={`Delete Category`} />
             </div>
         )
     }

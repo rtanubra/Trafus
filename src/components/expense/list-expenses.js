@@ -52,7 +52,7 @@ class ListExpensesComp extends Component{
                         <ButtonTemplate className="css_add_expense" label="Add an Expense"/>
                     </Link>
                     <Link to={`/${userId}/${teamId}`}>
-                        <button className="css_go_back">Back to Categories</button>
+                        <button className="css_back_button">Back to Categories</button>
                     </Link>
                     <CategorySummaryTable budget ={category.budget} current_expense={current_expense} />
                     <ul>{expenseListDisplay}</ul>

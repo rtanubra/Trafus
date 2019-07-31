@@ -8,20 +8,3 @@ input{
     font-size:13px;
     color:red;
 }
-button{
-
-}
-.css_back_button{
-    color:red;
-}
-.css_back_button:hover{
-    color:white;
-    background-color:red;
-}
-.css_submit_button{
-    color:green
-}
-.css_submit_button:hover{
-    color:white;
-    background-color:green
-}
