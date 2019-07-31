@@ -43,7 +43,10 @@ class TeamLanding extends Component{
             })
     }
     render(){
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
         const user = this.state.user? this.state.user.user_name : ""
         const {userId} =this.props.match.params
         if (this.state.success){

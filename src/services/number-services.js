@@ -8,7 +8,6 @@ const NumberService = {
 
     },
     dollarFormat(number){
-        const string = `$ ${number}`
         const integer = Math.floor(number)
         const intStr = integer.toString().split("").reverse().join("")
         const my_arr = intStr.match(/.{1,3}/g)

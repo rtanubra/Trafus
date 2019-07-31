@@ -37,10 +37,7 @@ class RegisterPage extends Component{
             })
             .then(
                 res =>{
-                    if (!res.ok){
-                        throw new Error(res.statusText)
-                    }
-                    res.json()}
+                    return res.json()}
         ).then(jsonRes=>{
             if (jsonRes.error){
                 error_main= true
@@ -76,7 +73,7 @@ class RegisterPage extends Component{
                     }
                 })
             }
-        }).catch(err=>{console.log(err)})
+        })
     }
     handlePasswordRepeatChange= (event)=>{
         const password_repeat = event.target.value

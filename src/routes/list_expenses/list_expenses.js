@@ -50,14 +50,15 @@ class ListExpenses extends Component{
                 <div>
                     {team?<h2>{`${team.name}`}</h2>:""}
                     <h3>{`${category.name}`}</h3>
-                    <CategorySummaryTable budget ={category.budget} current_expense={current_expense} />
-                    <ul>{expenseListDisplay}</ul>
                     <Link to={`/${userId}/${teamId}/${categoryId}/add_expense`}>
                         <ButtonTemplate className="css_add_expense" label="Add an Expense"/>
                     </Link>
                     <Link to={`/${userId}/${teamId}`}>
                         <button className="css_go_back">Back to Categories</button>
                     </Link>
+                    <CategorySummaryTable budget ={category.budget} current_expense={current_expense} />
+                    <ul>{expenseListDisplay}</ul>
+                    
                 </div>
             )
         } else {
