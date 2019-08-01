@@ -126,7 +126,7 @@ class CreateTeam extends Component{
                 <form onSubmit={this.handleSubmit} >
                 <fieldset>
                     {this.state.name_error?<ErrorMessage message={this.state.name_error_message} />:"" }
-                    <legend>Create a new team</legend>
+                    <legend>Create a Public Team</legend>
                     <label htmlFor="js_team_name" >Team Name : </label>
                     <input required onChange={this.handleNameChange} value={this.state.name} type="text" name="js_team_name" id="js_team_name"/>
                     <br/> 
@@ -141,7 +141,7 @@ class CreateTeam extends Component{
                 <button className="css_edit_category" onClick={this.togglePrivate}>Create a Public Team</button>
                 <form onSubmit={this.handleSubmit} >
                 <fieldset>
-                    <legend>Create a new team</legend>
+                    <legend>Create a Private Team</legend>
                     {this.state.name_error?<ErrorMessage message={this.state.name_error_message} />:"" }
                     <label htmlFor="js_team_name" >Team Name : </label>
                     <input required onChange={this.handleNameChange} value={this.state.name} type="text" name="js_team_name" id="js_team_name"/>

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import config from '../../config'
 import JoinPrivateTeam from './joinPrivateTeam'
+import './teamRadioButton.css'
 
 class JoinTeam extends Component{
     toggleJoinPrivate=(e)=>{
@@ -43,7 +44,7 @@ class JoinTeam extends Component{
         const key = `${team.name}_${team.id}`
         return (
         <div key={`div_${key}`}>
-            <input className={'css-team-radio'} onChange={this.onTeamChange} checked={parseInt(this.state.team)=== parseInt(team.id)}  type="radio" name="team_select" value={team.id} key={key}/>
+            <input className={'css_radio_teams'} onChange={this.onTeamChange} checked={parseInt(this.state.team)=== parseInt(team.id)}  type="radio" name="team_select" value={team.id} key={key}/>
             {`${team.name} - ${team.password? 'Private' :"Public"}`}
         </div>)
     }
