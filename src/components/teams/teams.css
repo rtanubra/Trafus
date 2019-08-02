@@ -1,3 +1,6 @@
 input.css_radio_teams{
     min-width:15px;
 }
+.js_hide_team{
+    display:none
+}
