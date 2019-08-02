@@ -5,11 +5,12 @@ import './teams.css'
 
 class JoinTeam extends Component{
     toggleViewPrivate =(e)=>{
-
+        e.preventDefault()
+        this.setState({view_private:!this.state.view_private})
     }
     toggleJoinPrivate=(e)=>{
         e.preventDefault()
-        this.setState({view_private:!this.state.view_private})
+        this.setState({join_private:false,view_private:false})
     }
     handleSubmit=(event)=>{
         event.preventDefault()
@@ -48,7 +49,7 @@ class JoinTeam extends Component{
         return (
         <div className={`${team.password?"css_private_team js_hide_team":"css_public_team"}`} key={`div_${key}`}>
             <input className={`css_radio_teams`} onChange={this.onTeamChange} checked={parseInt(this.state.team)=== parseInt(team.id)}  type="radio" name="team_select" value={team.id} key={key}/>
-            {`${team.name} - ${team.password? 'Private' :"Public"}`}
+            {`${team.name}`}
         </div>)
     }
     render(){
@@ -62,6 +63,7 @@ class JoinTeam extends Component{
         if (this.state.join_private){
             return <JoinPrivateTeam handleJoinTeam={this.props.handleJoinTeam} toggleJoinPrivate={this.toggleJoinPrivate} userId={this.props.userId} team={team} name={team.name}/>
         }
+        
         if (this.state.view_private){
             const priv = document.getElementsByClassName("css_private_team")
             const pub =  document.getElementsByClassName("css_public_team")
@@ -87,11 +89,11 @@ class JoinTeam extends Component{
 
             }
 
-
+        
         }
         return (
             <div>
-                <button className="css_edit_category" onClick={this.toggleJoinPrivate}>{this.state.view_private?"View Public Teams":"View Private Teams"}</button>
+                <button className="css_edit_category" onClick={this.toggleViewPrivate}>{this.state.view_private?"View Public Teams":"View Private Teams"}</button>
                 <form onSubmit={this.handleSubmit}>
                     <fieldset>
                         <legend>{this.state.view_private?"Join a Private Team":"Join a Public Team"}</legend>
