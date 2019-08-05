@@ -5,6 +5,8 @@ import Expense from "../../components/expense/expense"
 import '../../components/button/button.css'
 import {Link,Redirect} from 'react-router-dom'
 import ButtonTemplate from "../../components/button/button"
+import './list_expenses.css'
+
 class ListExpenses extends Component{
     static contextType = TrafusContext
     state ={
@@ -23,7 +25,6 @@ class ListExpenses extends Component{
 
     }
 
-
     render(){
         const {userId,categoryId, teamId} = this.props.match.params
         const team = this.state.teams.find(team=>{
@@ -33,10 +34,9 @@ class ListExpenses extends Component{
             return category.id === parseInt(categoryId)
         })
         const expenseList = this.context.trafus_expenses.filter(expense=>{
-
             return  expense.category_id === parseInt(categoryId)
-
         })
+        console.log(expenseList)
         const expenseListDisplay = expenseList.map(expense=>{
             return <Expense userId={userId} categoryId={categoryId} teamId={teamId}  key={`expense_${expense.id}`} expense={expense}/>
         })

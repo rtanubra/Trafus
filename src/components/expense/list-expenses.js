@@ -4,6 +4,7 @@ import CategorySummaryTable from '../../components/category/category_summary'
 import Expense from "../../components/expense/expense"
 import {Link,Redirect} from 'react-router-dom'
 import ButtonTemplate from "../../components/button/button"
+
 class ListExpensesComp extends Component{
     static contextType = TrafusContext
     state ={
@@ -35,6 +36,9 @@ class ListExpensesComp extends Component{
 
             return  expense.category_id === parseInt(categoryId)
 
+        })
+        expenseList.sort((a,b)=>{
+            return a.id < b.id
         })
         const expenseListDisplay = expenseList.map(expense=>{
             return <Expense userId={userId} categoryId={categoryId} teamId={teamId}  key={`expense_${expense.id}`} expense={expense}/>
