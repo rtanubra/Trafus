@@ -39,25 +39,28 @@ class LandingPage extends Component{
                     <p>
                         Build your team budget and let Trafus track it for you! Simply follow the steps below.
                     </p>
-                    <ol className="css-landing-page">
-                        <li>Create your Trafus Team.</li>
-                        <li>Create your budget Categories for your Team.</li>
-                        <li>Add Expenses to each Category as you spend.</li>
-                        <li>Quickly view your Team summary and Category summaries. </li>
-                        <li>Make sure your team stays on budget.</li>
-                    </ol>
+                    <div className="css-instructions-list">
+                        <ol className="css-landing-page">
+                            <li>Create a User</li>
+                            <li>Join an existing team or Create your own team</li>
+                            <li>Create categories for your team's budget</li>
+                            <li>Add Expenses to each category as you spend.</li>
+                            <li>Quickly view your team and category summaries. </li>
+                            <li>Make sure your team stays on budget.</li>
+                        </ol>
+                    </div>
                 </section>
                 <section>
                     <h2>Demo User</h2>
                     <p>To give trafus a try click the login button below. Then you can dive right into Trafus as a team member of the Team 1 </p>
                     <form onSubmit={this.handleSubmit}>
-                        <label htmlFor="demo_user">dunder</label>
-                        <input type="text" value="user_1" readOnly id="demo_user" name="demo_user"/>
+                        <label htmlFor="demo_user">Username</label>
+                        <input type="text" value="dunder" readOnly id="demo_user" name="demo_user"/>
                         <br/>
                         <label htmlFor="demo_password">Password</label>
                         <input type="password" value="hello_dunder" readOnly name="demo_password" id="demo_password"/>
                         <br/>
-                        <ButtonTemplate onClick={this.handleLogin} type="submit" className='css_submit_button'  label="Login as user_1 !"/>
+                        <ButtonTemplate onClick={this.handleLogin} type="submit" className='css_submit_button'  label="Login as dunder !"/>
                     </form>
                 </section>
             </div>

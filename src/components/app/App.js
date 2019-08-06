@@ -85,13 +85,6 @@ class App extends Component{
             })
             return team
         })
-        /*
-        const teams = [...this.context.trafus_teams]
-        const team = teams.find(t=>{
-            return parseInt(t.id) === parseInt(teamId)
-        })
-        return team
-        */
     }
     componentDidMount(){
         const team = 1

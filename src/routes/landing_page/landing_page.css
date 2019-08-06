@@ -10,9 +10,15 @@ nav {
   left: 0;
   right: 0;
   z-index: 10;
-  font-weight:bold
+  font-weight:bold;
 }
+.css-instructions-list{
+  min-width: 300px;
+  max-width:600px;
+  margin:auto;
+  text-align:left;
 
+}
 body {
   font-family: "Open Sans",sans-serif; 
   font-size: 20px;
@@ -29,12 +35,9 @@ section{
 section {
   min-height: 200px;
   padding: 30px 15px;
-  background-color: #bbb;
+  background-color: #8588CC;
 }
 
 section:nth-child(even) {
-  background-color: #ddd;
-}
-.css-landing-page li{
-  list-style:none;
+  background-color: #A6AAFF;
 }
