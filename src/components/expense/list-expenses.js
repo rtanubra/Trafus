@@ -25,7 +25,14 @@ class ListExpensesComp extends Component{
         })
         return spent
     }
-    
+    fetchUsers(){
+        const base_url = config.API_ENDPOINT
+        fetch(`${base_url}users`).then(res=>{
+            return res.json()
+        }).then(jsonRes=>{
+            this.setState({users:jsonRes})
+        })
+    }
     componentDidMount(){
         const base_url = config.API_ENDPOINT
         fetch(`${base_url}users`).then(res=>{
@@ -38,9 +45,6 @@ class ListExpensesComp extends Component{
 
     render(){
         const {userId,categoryId, teamId} = this.props
-        const team = this.state.teams.find(team=>{
-            return team.id === parseInt(teamId)
-        })
         const category = this.context.trafus_categories.find(category=>{
             return category.id === parseInt(categoryId)
         })
@@ -56,7 +60,7 @@ class ListExpensesComp extends Component{
             const user = this.state.users? this.state.users.find(usr=>{
                 return usr.id ===parseInt(expense.creator_id)
             }) : ""
-            return <Expense user={user} userId={userId} categoryId={categoryId} teamId={teamId}  key={`expense_${expense.id}`} expense={expense}/>
+            return <Expense fetchUsers={this.fetchUsers}  user={user} userId={userId} categoryId={categoryId} teamId={teamId}  key={`expense_${expense.id}`} expense={expense}/>
         })
         const current_expense= this.calculateCurrentExpense(category,expenseList)
 
