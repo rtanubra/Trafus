@@ -10,7 +10,7 @@ class Expense extends Component{
         //DateService.createDate(this.props.expense.date_created)
         return (
             <li>
-                {DateService.createDate(this.props.expense.date_created)}<br/>
+                {DateService.createDate(this.props.expense.date_created)} - {this.props.user?this.props.user.user_name:""}<br/>
                 <Link 
             to={`/${this.props.userId}/${this.props.teamId}/${this.props.categoryId}/${this.props.expense.id}/edit/`} >
                 <button className="css_edit_category small" >

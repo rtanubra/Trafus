@@ -5,12 +5,16 @@ import Expense from "../../components/expense/expense"
 import {Link,Redirect} from 'react-router-dom'
 import ButtonTemplate from "../../components/button/button"
 
+//config use
+import config from '../../config'
+
 class ListExpensesComp extends Component{
     static contextType = TrafusContext
     state ={
         teams : [...this.context.trafus_teams],
         categories: [...this.context.trafus_categories],
-        expenses:[...this.context.trafus_expenses]
+        expenses:[...this.context.trafus_expenses],
+        users:""
     }
     calculateCurrentExpense(category,expenses){
         let spent = 0
@@ -20,7 +24,15 @@ class ListExpensesComp extends Component{
             }
         })
         return spent
-
+    }
+    
+    componentDidMount(){
+        const base_url = config.API_ENDPOINT
+        fetch(`${base_url}users`).then(res=>{
+            return res.json()
+        }).then(jsonRes=>{
+            this.setState({users:jsonRes})
+        })
     }
 
 
@@ -41,7 +53,10 @@ class ListExpensesComp extends Component{
             return a.id < b.id
         })
         const expenseListDisplay = expenseList.map(expense=>{
-            return <Expense userId={userId} categoryId={categoryId} teamId={teamId}  key={`expense_${expense.id}`} expense={expense}/>
+            const user = this.state.users? this.state.users.find(usr=>{
+                return usr.id ===parseInt(expense.creator_id)
+            }) : ""
+            return <Expense user={user} userId={userId} categoryId={categoryId} teamId={teamId}  key={`expense_${expense.id}`} expense={expense}/>
         })
         const current_expense= this.calculateCurrentExpense(category,expenseList)
 

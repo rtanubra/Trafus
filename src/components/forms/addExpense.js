@@ -59,7 +59,9 @@ class AddExpenseForm extends Component{
             const expense = {
                 name:this.state.name,
                 expense:parseFloat(this.state.expense),
-                category_id:parseInt(categoryId)
+                category_id:parseInt(categoryId),
+                creator_id:this.props.userId,
+                date_created:new Date()
             }
             this.context.addExpense(expense)
             this.setState({
