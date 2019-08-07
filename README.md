@@ -1,7 +1,7 @@
 # Trafus
 
 ## Summary
-Trafus is a team budgetting app. Allows multiple users to maintain team budgets together!
+Trafus is a team budgeting app. Allows multiple users to maintain team budgets together!
 
 ### `Steps:`
 <ol>
@@ -28,16 +28,57 @@ Builds and deploys your application to production<br>
 
 ## API Documentation
 The application has four main parts:
+
+Development Server located at: [Run API server in localhost 8000](http://localhost:8000/api/)
+
+Production Server located at: [Heroku live application ](https://tranquil-journey-83977.herokuapp.com/api/)
+
+All return objects (if present) will be in JSON format.
+
 <ol>
     <li>Teams</li>
     <li>Users</li>
     <li>Categories</li>
     <li>Expenses</li>
 </ol>
-###
-###
-###
 
+### `Teams`
+
+#### `GET: /teams`:
+Gets all teams in trafus_teams
+####  `POST /teams`:
+Posts a team to trafus_teams
+body should include:
+<ul>
+    <li>name (team name) required</li>
+    <li>password (team password) optional</li>
+</ul>
+####   `GET: /teams/:teamId`:
+Gets a single team by ID in trafus_teams
+
+### `Users`
+
+#### `GET: /users`:
+Gets all users in trafus_users
+#### `PATCH: /users`:
+Updates a single user in trafus_users
+Use this when a user switches teams, to maintain different budgets.
+body should include:
+<ul>
+    <li>id (user id to update) required</li>
+    <li>team_id (team id to join) required</li>
+    <li>password (team password) required if joining a private team</li>
+</ul>
+
+#### `POST: /users`:
+Posts a new user into trafus_users
+
+#### `GET: /users/:userId`
+Gets a single user in trafus_users
+
+### `Categories`
+
+### `Expenses`
 
 ## Screenshots
 
