@@ -13,8 +13,12 @@ Trafus is a team budgeting app. Allows multiple users to maintain team budgets t
     <li>Make sure your team stays on budget.</li>
 </ol>
 
-## Live application
-[Trafus Application : https://rtanubra-trafus-app.now.sh/ ](https://rtanubra-trafus-app.now.sh/)
+## Links
+Trafus Application :[ https://rtanubra-trafus-app.now.sh/ ](https://rtanubra-trafus-app.now.sh/)
+
+Client repository : [ https://github.com/rtanubra/Trafus ](https://github.com/rtanubra/Trafus)
+
+Server repository: [ https://github.com/rtanubra/Trafus-Server ](https://github.com/rtanubra/Trafus-Server)
 
 ## Available Scripts
 ### `npm start`
@@ -36,11 +40,34 @@ Production Server located at: [https://tranquil-journey-83977.herokuapp.com/api/
 All return objects (if present) will be in JSON format.
 
 <ol>
+    <li>Authentication</li>
     <li>Teams</li>
     <li>Users</li>
     <li>Categories</li>
     <li>Expenses</li>
 </ol>
+
+### `Authentication`
+
+#### `POST: /login`
+
+Posts a user authentication for login.
+
+Body should include:
+<ul>
+    <li>user_name (bit 64 encoded username) - required</li>
+    <li>password (bit 64 encoded password) - required</li>
+</ul>
+
+Success will return:
+<ul>
+    <li>JWT TOKEN: payload includes: 
+        <ol>
+            <li>user_id - id of of user logged in </li>
+            <li>team_id - team id that the user belongs to at this time.</li>
+        </ol>
+    </li>
+</ul>
 
 ### `Teams`
 
