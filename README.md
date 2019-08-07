@@ -29,9 +29,9 @@ Builds and deploys your application to production<br>
 ## API Documentation
 The application has four main parts:
 
-Development Server located at: [Run API server in localhost 8000](http://localhost:8000/api/)
+Development Server located at: [http://localhost:8000/api/](http://localhost:8000/api/)
 
-Production Server located at: [Heroku live application ](https://tranquil-journey-83977.herokuapp.com/api/)
+Production Server located at: [https://tranquil-journey-83977.herokuapp.com/api/](https://tranquil-journey-83977.herokuapp.com/api/)
 
 All return objects (if present) will be in JSON format.
 
@@ -48,11 +48,13 @@ All return objects (if present) will be in JSON format.
 Gets all teams in trafus_teams
 ####  `POST /teams`:
 Posts a team to trafus_teams
+
 body should include:
 <ul>
     <li>name (team name) required</li>
     <li>password (team password) optional</li>
 </ul>
+
 ####   `GET: /teams/:teamId`:
 Gets a single team by ID in trafus_teams
 
@@ -63,6 +65,7 @@ Gets all users in trafus_users
 #### `PATCH: /users`:
 Updates a single user in trafus_users
 Use this when a user switches teams, to maintain different budgets.
+
 body should include:
 <ul>
     <li>id (user id to update) required</li>
@@ -73,12 +76,91 @@ body should include:
 #### `POST: /users`:
 Posts a new user into trafus_users
 
-#### `GET: /users/:userId`
+#### `GET: /users/:userId`:
 Gets a single user in trafus_users
 
 ### `Categories`
 
+#### `GET: /categories/:teamId`
+
+Gets obtain all the categories belonging to a specific team from trafus_categories.
+
+body should include:
+
+<ul>
+    <li>team_id -required</li>
+</ul>
+
+#### `POST: /categories/:teamId`
+
+Posts a new category with a specified team_id into trafus_categories
+
+body should include:
+
+<ul>
+    <li>team_id (team id where category will belong to) - required</li>
+    <li>name (category name) - required</li>
+    <li>budget (budget for the new category) - required</li>
+</ul>
+
+#### `GET /category/:categoryId`
+
+Gets a single category from trafus_categories with a specified id. 
+
+#### `PATCH /category/:categoryId`
+
+Updates a category with categoryId from trafus_categories
+
+body should include:
+
+<ul>
+    <li>categoryId (id to of category to be updated) required</li>
+    <li>name (new category name) - name or budget required</li>
+    <li>budget (new budget for category) - name or budget required</li>
+</ul>
+
+#### `DELETE /category/:categoryId`
+
+Deletes a category from trafus_categories by id.
+
 ### `Expenses`
+
+#### `GET /expenses`
+
+GETs all the expenses from trafus_expenses
+
+#### `POST /expenses`
+
+POSTS a new expense into trafus_expenses
+
+body should include:
+
+<ul>
+    <li>name (expense name) required</li>
+    <li>expense (expense amount) required</li>
+    <li>category_id (which category expense belongs to) required</li>
+    <li>creator_id (which user created this expense) required</li>
+    <li>date_created (date this expense was created) optional - defaults to today</li>
+</ul>
+
+#### `GET /expenses/:expenseId`
+
+gets a single expense from trafus_expenses by id
+
+#### `PATCH /expenses/:expenseId`
+
+Updates an expense from trafus_expenses by id
+
+body should include:
+
+<ul>
+    <li>name (new expense name) - 1 of name/expense required</li>
+    <li>expense (new expense amount) - 1 of name/expense required</li>
+</ul>
+
+#### `DELETE /expenses/:expenseId`
+
+deletes a single expense from trafus_expenses by id
 
 ## Screenshots
 
