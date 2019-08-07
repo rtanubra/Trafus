@@ -192,17 +192,22 @@ deletes a single expense from trafus_expenses by id
 ## Screenshots
 
 ### `Landing Page -with instructions`
-![GitHub Logo](./screenshots/landing_page_instructions.png)
+![Landing Page](./screenshots/landing_page_instructions.png)
 
 ### `Quick Login to use demo account`
+![Login with demo user](./screenshots/quick_login_demo.png)
 
 ### `Team summary`
+![Team summary](./screenshots/team_summary.png)
 
 ### `Category Summary`
+![Category Summary](./screenshots/category_summary.png)
 
 ###  `Edit Category`
+![Edit Category](./screenshots/edit_category.png)
 
 ### `Edit Expense` 
+![Edit Expense](./screenshots/edit_expense.png)
 
 ## Technology Used
 ### `Client`
