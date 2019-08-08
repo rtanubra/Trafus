@@ -85,19 +85,19 @@ body should include:
     <li>password (team password) optional</li>
 </ul>
 
-Success will return the new team as an object
+Success will return the new team as an object.
 
 ####   `GET: /teams/:teamId`:
 Gets a single team by ID in trafus_teams
 
-Success will return the team requested as an object
+Success will return the team requested as an object.
 
 ### `Users`
 
 #### `GET: /users`:
 Gets all users in trafus_users
 
-Success will return an array of users as objects
+Success will return an array of users as objects.
 
 #### `PATCH: /users`:
 Updates a single user in trafus_users
@@ -110,17 +110,17 @@ body should include:
     <li>password (team password) required if joining a private team</li>
 </ul>
 
-Success will return the updated user as an object
+Success will return the updated user as an object.
 
 #### `POST: /users`:
 Posts a new user into trafus_users
 
-Success will return the new user as an object
+Success will return the new user as an object.
 
 #### `GET: /users/:userId`:
 Gets a single user in trafus_users
 
-Success will return the requested user as an object
+Success will return the requested user as an object.
 
 ### `Categories`
 
@@ -134,6 +134,8 @@ body should include:
     <li>team_id -required</li>
 </ul>
 
+Success will return an array of categories as objects belonging to the same team.
+
 #### `POST: /categories/:teamId`
 
 Posts a new category with a specified team_id into trafus_categories
@@ -146,9 +148,13 @@ body should include:
     <li>budget (budget for the new category) - required</li>
 </ul>
 
+Success will return the new category as an object.
+
 #### `GET /category/:categoryId`
 
-Gets a single category from trafus_categories with a specified id. 
+Gets a single category from trafus_categories with a specified id.
+
+Success will return the category requested as an object. 
 
 #### `PATCH /category/:categoryId`
 
@@ -162,6 +168,8 @@ body should include:
     <li>budget (new budget for category) - name or budget required</li>
 </ul>
 
+Success will return the updated category as an object.
+
 #### `DELETE /category/:categoryId`
 
 Deletes a category from trafus_categories by id.
@@ -171,6 +179,8 @@ Deletes a category from trafus_categories by id.
 #### `GET /expenses`
 
 GETs all the expenses from trafus_expenses
+
+Success will return an array of expenses as objects.
 
 #### `POST /expenses`
 
@@ -186,9 +196,13 @@ body should include:
     <li>date_created (date this expense was created) optional - defaults to today</li>
 </ul>
 
+Success will return the new expense as an object.
+
 #### `GET /expenses/:expenseId`
 
 gets a single expense from trafus_expenses by id
+
+Success will return the expense requested as an object.
 
 #### `PATCH /expenses/:expenseId`
 
@@ -200,6 +214,8 @@ body should include:
     <li>name (new expense name) - 1 of name/expense required</li>
     <li>expense (new expense amount) - 1 of name/expense required</li>
 </ul>
+
+Success will return the updated expense as an object.
 
 #### `DELETE /expenses/:expenseId`
 
