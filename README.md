@@ -31,13 +31,13 @@ Builds the app for production to the `build` folder.<br>
 Builds and deploys your application to production<br>
 
 ## API Documentation
-The application has four main parts:
+The application has five main parts:
 
 Development Server located at: [http://localhost:8000/api/](http://localhost:8000/api/)
 
 Production Server located at: [https://tranquil-journey-83977.herokuapp.com/api/](https://tranquil-journey-83977.herokuapp.com/api/)
 
-All return objects (if present) will be in JSON format.
+All return objects (if present) will be in JSON objects. All input bodies (if required) are JSON objects.
 
 <ol>
     <li>Authentication</li>
@@ -73,6 +73,9 @@ Success will return:
 
 #### `GET: /teams`:
 Gets all teams in trafus_teams
+
+Success will return an array of teams as objects.
+
 ####  `POST /teams`:
 Posts a team to trafus_teams
 
@@ -82,13 +85,20 @@ body should include:
     <li>password (team password) optional</li>
 </ul>
 
+Success will return the new team as an object
+
 ####   `GET: /teams/:teamId`:
 Gets a single team by ID in trafus_teams
+
+Success will return the team requested as an object
 
 ### `Users`
 
 #### `GET: /users`:
 Gets all users in trafus_users
+
+Success will return an array of users as objects
+
 #### `PATCH: /users`:
 Updates a single user in trafus_users
 Use this when a user switches teams, to maintain different budgets.
@@ -100,11 +110,17 @@ body should include:
     <li>password (team password) required if joining a private team</li>
 </ul>
 
+Success will return the updated user as an object
+
 #### `POST: /users`:
 Posts a new user into trafus_users
 
+Success will return the new user as an object
+
 #### `GET: /users/:userId`:
 Gets a single user in trafus_users
+
+Success will return the requested user as an object
 
 ### `Categories`
 
